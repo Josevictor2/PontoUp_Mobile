@@ -1,22 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import React from 'react';
+import { Home } from './src/components/Home';
+import { NativeBaseProvider } from "native-base";
+import useCachedResources from './src/hooks/useCachedResources';
+import { StatusBar } from 'react-native';
+import { theme } from './src/theme';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+      <NativeBaseProvider theme={theme}>
+        <StatusBar
+          barStyle={"dark-content"}
+          translucent
+          backgroundColor="transparent"
+        />
+        <Home />
+      </NativeBaseProvider>
     );
   }
 }
