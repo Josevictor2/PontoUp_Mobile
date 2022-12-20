@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "material-icon-theme.activeIconPack": "react",
+    "[typescriptreact]": {
+        "editor.formatOnSave": true
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    } 
+}
