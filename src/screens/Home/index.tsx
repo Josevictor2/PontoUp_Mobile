@@ -10,22 +10,35 @@ import { useNavigation } from "@react-navigation/native";
 import { DrawerActions } from '@react-navigation/native';
 import { IconButton } from "../../components/IconButton";
 import { FormJustify } from "../../components/ActionSheet";
+import Animated, { ZoomIn } from "react-native-reanimated";
+import { useAnimattion } from "../../hooks/useAnimation";
+import { useAnimattion as useButton } from "../../hooks/useAnimation";
 
 export const HomeScreen = () => {
 
     const {onOpen, isOpen, onClose} = useDisclose();
     const navigation = useNavigation();
+    const {pressed, animatedStyle} = useAnimattion();
+    const {pressed: pressedButton, animatedStyle: animatedStyleButton} = useButton({valueScale: 1.1});
+    const {pressed: pressedButton2, animatedStyle: animatedStyleButton2} = useButton({valueScale: 1.1});
     
     return (    
         <ScrollView bg="#EBEEF2" flex={1}>
             <VStack width="100%" safeArea>
                 <VStack bg="#ffffff" >
                     <HStack mt={hp("2.6%")} px={wp("6.1%")} alignItems="center" justifyContent="space-between">
-                        <Image width={wp("22.4%")} height={hp("4.2%")} resizeMode="contain" source={logo} alt="PontoUp" />
-                        <Pressable onPress={()=> navigation.dispatch(DrawerActions.openDrawer())}>
-                            <Box borderRadius={4} borderWidth="1" p="8px" borderColor="text.100">
-                                <Icon as={<MaterialIcons name="menu" />} size="24px" />
-                            </Box>
+                        <Animated.View entering={ZoomIn.duration(1500)}>
+                            <Image width={wp("22.4%")} height={hp("4.2%")} resizeMode="contain" source={logo} alt="PontoUp" />
+                        </Animated.View>
+                        <Pressable 
+                        onPressIn={() => pressed.value = true}
+                        onPressOut={() => pressed.value = false}
+                        onPress={()=> navigation.dispatch(DrawerActions.openDrawer())}>
+                            <Animated.View style={animatedStyle}>
+                                <Box borderRadius={4} borderWidth="1" p="8px" borderColor="text.100">
+                                    <Icon as={<MaterialIcons name="menu" />} size="24px" />
+                                </Box>
+                            </Animated.View>
                         </Pressable>
                     </HStack>
                     <HStack mt={hp(3.6)} mb={hp(2.1)} px={wp("6.1%")} alignItems="center" justifyContent="space-between">
@@ -60,16 +73,28 @@ export const HomeScreen = () => {
                         <Button children="Finalizar expediente" h={hp(6.2)} bgPressed="red.500" bg="#D95D4226" color="#D95D42"/>
                     </VStack>
                     <VStack mt={hp(2.9)} space={hp(1.2)}>
-                        <IconButton height={hp(8.4)} onPress={() => {navigation.navigate("Justification")}}>
-                            <Icon as={<Feather name="eye" />} size={6} color="text.300" />
-                            <Text ml={3.5} color="#44484D" h={6} mb={1} fontFamily="body" fontWeight="400" fontSize="md">Visualizar Frequência</Text>
-                            <Icon as={Feather} ml="auto" name="chevron-right" size="sm" color="text.300" />
-                        </IconButton>
-                        <IconButton height={hp(8.4)} onPress={onOpen}>
-                            <Icon as={<MaterialCommunityIcons name="calendar-clock-outline" />} size={6} color="text.300" />
-                            <Text ml={3.5} color="#44484D" h={6} mb={1} fontFamily="body" fontWeight="400" fontSize="md">Justificar falta</Text>
-                            <Icon as={Feather} ml="auto" name="chevron-right" size="sm" color="text.300" />
-                        </IconButton>
+                        <Animated.View style={animatedStyleButton}>
+                            <IconButton 
+                            onPressIn={() => pressedButton.value = true}
+                            onPressOut={() => pressedButton.value = false}
+                            height={hp(8.4)} 
+                            onPress={() => {navigation.navigate("Justification")}}>
+                                <Icon as={<Feather name="eye" />} size={6} color="text.300" />
+                                <Text ml={3.5} color="#44484D" h={6} mb={1} fontFamily="body" fontWeight="400" fontSize="md">Visualizar Frequência</Text>
+                                <Icon as={Feather} ml="auto" name="chevron-right" size="sm" color="text.300" />
+                            </IconButton>
+                        </Animated.View>
+                        <Animated.View style={animatedStyleButton2}>
+                            <IconButton 
+                            onPressIn={() => pressedButton2.value = true}
+                            onPressOut={() => pressedButton2.value = false}
+                            height={hp(8.4)} 
+                            onPress={onOpen}>
+                                <Icon as={<MaterialCommunityIcons name="calendar-clock-outline" />} size={6} color="text.300" />
+                                <Text ml={3.5} color="#44484D" h={6} mb={1} fontFamily="body" fontWeight="400" fontSize="md">Justificar falta</Text>
+                                <Icon as={Feather} ml="auto" name="chevron-right" size="sm" color="text.300" />
+                            </IconButton>
+                        </Animated.View>
                     </VStack>
                 </VStack>
             </VStack>
