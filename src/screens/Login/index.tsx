@@ -14,6 +14,7 @@ import { LoginSchema } from "./schema";
 import { useAuth } from "../../hooks/useAuth";
 import { Footer } from "../../components/Footer";
 import { Keyboard, Platform, _ScrollView } from "react-native";
+import Animated, { BounceInLeft, BounceInRight, ZoomInLeft, ZoomInRight } from "react-native-reanimated";
 
 
 export function LoginScreen(){
@@ -50,38 +51,48 @@ export function LoginScreen(){
                 behavior={platform}
                 flex={1}
                 >
-                <Image width={wp("40%")} height={hp("8%")} resizeMode="contain" source={logo} alt="PontoUp" />
+                <Animated.View entering={BounceInRight.duration(1000)}>
+                    <Image width={wp("40%")} height={hp("8%")} resizeMode="contain" source={logo} alt="PontoUp" />
+                </Animated.View>
                 <ScrollView 
                 flex={1} 
                 automaticallyAdjustKeyboardInsets>
                 <VStack borderRadius={8} borderWidth="1" borderColor="text.100" w={wp("88%")} mt={marginTop} px={wp(8.5)} py={hp(4.2)}>
-                    <Text fontFamily="body" fontWeight="400" color="primary.900" lineHeight={hp(4.7)} fontSize="2xl" mb={2}>
-                        Fazer Login
-                    </Text>
-                    <Text w={wp("75%")} fontFamily="body" fontWeight="300" color="text.50" lineHeight={hp(2.7)} fontSize="sm">
-                        Seja bem-vindo(a)! Insira sua matrícula para entrar na conta.
-                    </Text>
+                    <Animated.Text entering={ZoomInLeft.duration(1100)}>
+                        <Text fontFamily="body" fontWeight="400" color="primary.900" lineHeight={hp(4.7)} fontSize="2xl" mb={2}>
+                            Fazer Login
+                        </Text>
+                    </Animated.Text>
+                    <Animated.Text entering={ZoomInLeft.duration(1200)}>
+                        <Text w={wp("75%")} fontFamily="body" fontWeight="300" color="text.50" lineHeight={hp(2.7)} fontSize="sm">
+                            Seja bem-vindo(a)! Insira sua matrícula para entrar na conta.
+                        </Text>
+                    </Animated.Text>
                 
                     <VStack mt={hp("7.29%")} space={3}>
                         <Controller
                         control={control}
                         name="password"
                         render={({ field: { onChange, onBlur, value } }) => (
-                            <Input 
-                            keyboardType="numeric"
-                            type={show ? "text" : "password"} 
-                            placeholder="Matrícula" 
-                            errorMessage={errors.password?.message}
-                            onChangeText={onChange}
-                            InputRightElement={
-                                <Pressable onPress={() => setShow(!show)}>
-                                    <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={6} mr={3} />
-                                </Pressable>
-                            }
-                            />
+                            <Animated.View entering={BounceInLeft.duration(1200)}>
+                                <Input 
+                                keyboardType="numeric"
+                                type={show ? "text" : "password"} 
+                                placeholder="Matrícula" 
+                                errorMessage={errors.password?.message}
+                                onChangeText={onChange}
+                                InputRightElement={
+                                    <Pressable onPress={() => setShow(!show)}>
+                                        <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={6} mr={3} />
+                                    </Pressable>
+                                }
+                                />
+                            </Animated.View>
                         )}
                         />
-                        <Button color="white" onPress={handleSubmit(SubmitLogin)} children="Entrar na conta" mt={hp(4.2)} />
+                        <Animated.View entering={BounceInRight.duration(1200)}>
+                            <Button color="white" onPress={handleSubmit(SubmitLogin)} children="Entrar na conta" mt={hp(4.2)} />
+                        </Animated.View>
                     </VStack>
                 </VStack>
                 <Box flexGrow={1} />
