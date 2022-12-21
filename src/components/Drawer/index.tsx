@@ -1,6 +1,6 @@
 import React from "react"
 
-import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
+import { DrawerContentComponentProps, DrawerContentScrollView } from "@react-navigation/drawer";
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { HStack, Pressable, VStack, Image, Icon, Box, Text } from "native-base";
@@ -10,20 +10,30 @@ import logo from "../../assets/images/pontoUplogo.png";
 import perfil from "../../assets/images/perfil.png";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { IconButton } from "../IconButton";
+import { useAnimattion } from "../../hooks/useAnimation";
+import Animated from "react-native-reanimated";
 
 export const CustomDrawer = (props :  DrawerContentComponentProps) => {
     
     const navigation = useNavigation();
+    const {animatedStyle, pressed} = useAnimattion();
+
     return (
         <VStack flex={1}>
             <DrawerContentScrollView
             {...props}>
                 <HStack mt={hp("2.6%")} px={wp("5.4%")} alignItems="center" justifyContent="space-between">
                     <Image width={wp("22.4%")} height={hp("4.2%")} resizeMode="contain" source={logo} alt="PontoUp" />
-                    <Pressable onPress={()=> navigation.dispatch(DrawerActions.closeDrawer())}>
-                        <Box borderRadius={4} borderWidth="1" p="8px" borderColor="text.100">
-                            <Icon as={<MaterialIcons name="close" />} size="24px" />
-                        </Box>
+                    <Pressable 
+                    onPressIn={() => pressed.value = true}
+                    onPressOut={() => pressed.value = false}
+                    onPress={()=> navigation.dispatch(DrawerActions.closeDrawer())}
+                    >
+                        <Animated.View style={animatedStyle}>
+                            <Box borderRadius={4} borderWidth="1" p="8px" borderColor="text.100">
+                                <Icon as={<MaterialIcons name="close" />} size="24px" />
+                            </Box>
+                        </Animated.View>
                     </Pressable>
                 </HStack>
                 <HStack mx={wp(5.4)} mt={hp("4.7%")} px={wp(5.4)} py={hp(1.6)} space={wp(3.2)} alignItems="center" borderWidth={1} borderColor="#EBEEF2">
