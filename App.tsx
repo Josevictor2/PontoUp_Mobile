@@ -7,23 +7,33 @@ import { theme } from './src/theme';
 import { Router } from './src/routes/Router';
 import { AuthProvider } from './src/contexts/Auth';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
+import { ModalContextProvider } from './src/contexts/Modal';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
+
+  const config = {
+    dependencies: {
+      'linear-gradient': LinearGradient
+    }
+  };
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <NativeBaseProvider theme={theme}>
+      <NativeBaseProvider config={config} theme={theme}>
         <SafeAreaProvider>
           <StatusBar
             barStyle={"dark-content"}
             translucent
-            backgroundColor="#ffffff"
+            backgroundColor="transparent"
           />
           <AuthProvider>
-            <Router />
+            <ModalContextProvider>
+              <Router />
+            </ModalContextProvider>
           </AuthProvider>
         </SafeAreaProvider>
       </NativeBaseProvider>
