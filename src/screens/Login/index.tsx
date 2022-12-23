@@ -67,7 +67,7 @@ export function LoginScreen(){
                             <Controller
                             control={control}
                             name="password"
-                            render={({ field: { onChange, onBlur, value } }) => (
+                            render={({ field: { onChange } }) => (
                                 <Animated.View entering={BounceInLeft.duration(1200)}>
                                     <Input 
                                     keyboardType="numeric"
