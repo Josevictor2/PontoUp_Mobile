@@ -54,7 +54,7 @@ export const FormJustify = ({onClose, isOpen ,...props}: IActionsheetProps) => {
         setDateEnd(date!);
     }
 
-    const { control, handleSubmit, formState: { errors } } = useForm<ActionProps>({
+    const { control, setValue , handleSubmit, formState: { errors } } = useForm<ActionProps>({
         resolver: yupResolver(ActionSchema),
         defaultValues: {
             initData: new Date(),
@@ -91,7 +91,7 @@ export const FormJustify = ({onClose, isOpen ,...props}: IActionsheetProps) => {
                     <Controller
                     control={control}
                     name="select"
-                    render={({ field: { onChange, onBlur, value } }) => (
+                    render={({ field: { onChange, value } }) => (
                         <FormControl isInvalid={!!errors.select}>
                             <Select
                             borderColor="text.100"
@@ -137,7 +137,7 @@ export const FormJustify = ({onClose, isOpen ,...props}: IActionsheetProps) => {
                     />
 
                     <IconButton height={hp(6.2)} onPress={() => setShow(true)}>
-                        <Text ml={3.5} color="#44484D" h={6} mb={1} fontFamily="body" fontWeight="400" fontSize="md">Data Inicial</Text>
+                        <Text ml={3.5} color="#44484D" h={6} mb={1} fontFamily="body" fontWeight="400" fontSize="md"> Data Inicial</Text>
                         <Icon as={Feather} ml="auto" name="calendar" size="md" color="text.300" />
                     </IconButton>
                     {show && (
