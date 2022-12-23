@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { JustificationScreen } from "../screens/Justification";
+import { ViewRegisterScreen } from "../screens/ViewRegisterPoint";
 import { DrawerRouter } from "./Drawer";
 
-export type AppParamList = Record<"Home" | "Drawer" |"Justification" , undefined>;
+export type AppParamList = Record<"Home" | "Drawer" |"View" , undefined>;
 
 const Stack = createNativeStackNavigator<AppParamList>();
 
@@ -15,7 +15,7 @@ export const AppStack = () => {
         }}
         >
             <Stack.Screen name="Drawer" component={DrawerRouter} />
-            <Stack.Screen name="Justification" component={JustificationScreen} />
+            <Stack.Screen name="View" component={ViewRegisterScreen} />
         </Stack.Navigator>
     );
 };
