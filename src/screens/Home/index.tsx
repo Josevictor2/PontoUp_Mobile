@@ -1,5 +1,5 @@
-import { VStack, Text, HStack, Image, Icon, Box, ScrollView, useDisclose } from "native-base"
-import { Button } from "../../components/Button";
+import { VStack, Text, HStack, Image, Icon, Box, ScrollView, useDisclose, StatusBar } from "native-base"
+
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import logo from "../../assets/images/pontoUplogo.png";
@@ -13,17 +13,25 @@ import { FormJustify } from "../../components/ActionSheet";
 import Animated, { ZoomIn } from "react-native-reanimated";
 import { useAnimattion } from "../../hooks/useAnimation";
 import { useAnimattion as useButton } from "../../hooks/useAnimation";
+import { ModalComponent } from "../../components/Modal";
+import { RegisterButtons } from "../../components/RegisterPoints";
 
 export const HomeScreen = () => {
 
     const {onOpen, isOpen, onClose} = useDisclose();
     const navigation = useNavigation();
+
     const {pressed, animatedStyle} = useAnimattion();
     const {pressed: pressedButton, animatedStyle: animatedStyleButton} = useButton({valueScale: 1.1});
     const {pressed: pressedButton2, animatedStyle: animatedStyleButton2} = useButton({valueScale: 1.1});
     
     return (    
         <ScrollView bg="#EBEEF2" flex={1}>
+            <StatusBar
+            barStyle={"dark-content"}
+            translucent
+            backgroundColor="#ffffff"
+            />
             <VStack width="100%" safeArea>
                 <VStack bg="#ffffff" >
                     <HStack mt={hp("2.6%")} px={wp("6.1%")} alignItems="center" justifyContent="space-between">
@@ -58,7 +66,7 @@ export const HomeScreen = () => {
                 </VStack>
 
                 <VStack px={wp(6.4)}>
-                <HStack alignItems="center" mt={hp(4.2)} width="100%" justifyContent="space-between">
+                    <HStack alignItems="center" mt={hp(4.2)} width="100%" justifyContent="space-between">
                         <Text fontFamily="body" fontWeight="300" fontSize="xl" lineHeight={hp(3.6)} bold>
                             Registrar Ponto
                         </Text>
@@ -66,19 +74,16 @@ export const HomeScreen = () => {
                             12/11/2022 às 21:07 min
                         </Text>
                     </HStack>
-                    <VStack mt="8px" p="20px" space={hp(1.2)} bg="secondary.50" borderRadius={8}>
-                        <Button children="Iniciar expediente" h={hp(6.2)} bg="#30663C26" color="text.300"/>
-                        <Button children="Pausa" h={hp(6.2)} bg="#3FA4EE26" bgPressed="info.500" color="#2D9DEF"/>
-                        <Button children="Retorno" h={hp(6.2)} bg="#DF992F26" bgPressed="yellow.600" color="#DF992F"/>
-                        <Button children="Finalizar expediente" h={hp(6.2)} bgPressed="red.500" bg="#D95D4226" color="#D95D42"/>
-                    </VStack>
+
+                    <RegisterButtons />
+
                     <VStack mt={hp(2.9)} space={hp(1.2)}>
                         <Animated.View style={animatedStyleButton}>
                             <IconButton 
                             onPressIn={() => pressedButton.value = true}
                             onPressOut={() => pressedButton.value = false}
                             height={hp(8.4)} 
-                            onPress={() => {navigation.navigate("Justification")}}>
+                            onPress={() => {navigation.navigate("View")}}>
                                 <Icon as={<Feather name="eye" />} size={6} color="text.300" />
                                 <Text ml={3.5} color="#44484D" h={6} mb={1} fontFamily="body" fontWeight="400" fontSize="md">Visualizar Frequência</Text>
                                 <Icon as={Feather} ml="auto" name="chevron-right" size="sm" color="text.300" />
@@ -96,9 +101,10 @@ export const HomeScreen = () => {
                             </IconButton>
                         </Animated.View>
                     </VStack>
+                    <FormJustify isOpen={isOpen} onClose={onClose} />
                 </VStack>
             </VStack>
-            <FormJustify isOpen={isOpen} onClose={onClose} />
+            <ModalComponent />
         </ScrollView>
     )
 }
