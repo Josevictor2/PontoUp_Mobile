@@ -16,7 +16,7 @@ import {
     TextArea, 
     VStack 
 } from "native-base";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -25,7 +25,10 @@ import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/dat
 import { ActionSchema } from "./shema";
 import { ActionProps } from "./types";
 import { IconButton } from "../IconButton";
-import { Platform, Keyboard } from "react-native";
+import { Platform } from "react-native";
+import Animated from "react-native-reanimated";
+import { useKeyboard } from "../../hooks/useKeyboard";
+import { useAnimattion } from "../../hooks/useAnimation";
 
 export const FormJustify = ({onClose, isOpen ,...props}: IActionsheetProps) => {
 
@@ -35,29 +38,16 @@ export const FormJustify = ({onClose, isOpen ,...props}: IActionsheetProps) => {
     const [dateEnd, setDateEnd] = useState(new Date());
 
     const [textAreaValue, setTextAreaValue] = useState("");
-    const [PressedKey, setPressedKey] = useState(false);
-
+    
     const platform = Platform.OS === "ios" ? "padding" : "height";
+    
+    const {animatedStyle, pressed} = useAnimattion();
+    const { PressedKey } = useKeyboard();
 
     const onDateSelect = (event: DateTimePickerEvent, date?: Date ) =>{
         setShow(false);
         setDate(date!);
     }
-
-    const onSelectedKey = Keyboard.addListener("keyboardDidShow", () => {
-        setPressedKey(true);
-    })
-
-    const onUnselectedKey = Keyboard.addListener("keyboardDidHide", () => {
-        setPressedKey(false);
-    })
-
-    useEffect(() => {
-        return () => {
-            onSelectedKey.remove();
-            onUnselectedKey.remove();
-        }
-    }, [PressedKey])
 
     const onDateSelectEnd = (event: DateTimePickerEvent, date?: Date ) =>{
         setShowEnd(false);
@@ -85,10 +75,15 @@ export const FormJustify = ({onClose, isOpen ,...props}: IActionsheetProps) => {
                 <HStack alignItems="center">
                         <Text fontSize="md" fontFamily="body" fontWeight="400">Justificativa para ocorrência</Text>
                         <Box flex={1} />
-                        <Pressable onPress={onClose}>
-                            <Box borderRadius={4} borderWidth="1" p="8px" borderColor="text.100">
-                                <Icon as={<MaterialIcons name="close" />} size="24px" />                            
-                            </Box>
+                        <Pressable
+                        onPressIn={() => pressed.value =true}
+                        onPressOut={() => pressed.value =false} 
+                        onPress={onClose}>
+                            <Animated.View style={animatedStyle}>
+                                <Box borderRadius={4} borderWidth="1" p="8px" borderColor="text.100">
+                                    <Icon as={<MaterialIcons name="close" />} size="24px" />                            
+                                </Box>
+                            </Animated.View>
                         </Pressable>
                     </HStack>
                 <ScrollView flex={1}>
