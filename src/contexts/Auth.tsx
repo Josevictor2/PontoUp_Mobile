@@ -20,7 +20,7 @@ export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider: FC<AuthContextProviderProps> = ({ children }) => {
     const [auth, setAuth] = useState<User>();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         loadStorageData();
