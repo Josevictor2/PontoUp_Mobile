@@ -1,4 +1,4 @@
-import { Input as NativeInput, IInputProps, FormControl } from "native-base";
+import { Input as NativeInput, IInputProps, FormControl } from 'native-base';
 
 type Props = IInputProps & {
   errorMessage?: string;
@@ -17,8 +17,8 @@ export const Input = ({ errorMessage, isInvalid, ...props }: Props) => {
         borderWidth={2}
         {...props}
         _focus={{
-          bg: "secondary.50",
-          borderColor: "primary.900",
+          bg: 'secondary.50',
+          borderColor: 'primary.900',
         }}
       />
       <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>

@@ -1,6 +1,7 @@
-import { VStack, Text } from "native-base";
-import packageJson from "../../../package.json";
-import Animated, { ZoomIn } from "react-native-reanimated";
+import { VStack, Text } from 'native-base';
+import Animated, { ZoomIn } from 'react-native-reanimated';
+
+import packageJson from '../../../package.json';
 
 export const Footer = () => {
   return (

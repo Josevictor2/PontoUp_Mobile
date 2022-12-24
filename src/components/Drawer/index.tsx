@@ -1,14 +1,15 @@
-import React from "react";
+import { useNavigation, DrawerActions } from '@react-navigation/native';
+import Animated from 'react-native-reanimated';
 
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
-} from "@react-navigation/drawer";
+} from '@react-navigation/drawer';
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+} from 'react-native-responsive-screen';
 import {
   HStack,
   Pressable,
@@ -18,22 +19,22 @@ import {
   Box,
   Text,
   useDisclose,
-} from "native-base";
+} from 'native-base';
+
 import {
   MaterialIcons,
   Feather,
   MaterialCommunityIcons,
   SimpleLineIcons,
-} from "@expo/vector-icons";
+} from '@expo/vector-icons';
 
-import logo from "../../assets/images/pontoUplogo.png";
-import perfil from "../../assets/images/perfil.png";
-import { useNavigation, DrawerActions } from "@react-navigation/native";
-import { IconButton } from "../IconButton";
-import { useAnimattion } from "../../hooks/useAnimation";
-import Animated from "react-native-reanimated";
-import { useAnimattion as useButton } from "../../hooks/useAnimation";
-import { FormJustify } from "../ActionSheet";
+import logo from '@assets/images/pontoUplogo.png';
+import perfil from '@assets/images/perfil.png';
+
+import { useAnimattion } from '@hooks/useAnimation';
+import { useAnimattion as useButton } from '@hooks/useAnimation';
+import { FormJustify } from '@components/ActionSheet';
+import { IconButton } from '@components/IconButton';
 
 export const CustomDrawer = (props: DrawerContentComponentProps) => {
   const navigation = useNavigation();
@@ -48,14 +49,14 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
     <VStack flex={1}>
       <DrawerContentScrollView {...props}>
         <HStack
-          mt={hp("2.6%")}
-          px={wp("5.4%")}
+          mt={hp('2.6%')}
+          px={wp('5.4%')}
           alignItems="center"
           justifyContent="space-between"
         >
           <Image
-            width={wp("22.4%")}
-            height={hp("4.2%")}
+            width={wp('22.4%')}
+            height={hp('4.2%')}
             resizeMode="contain"
             source={logo}
             alt="PontoUp"
@@ -81,7 +82,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
 
         <HStack
           mx={wp(5.4)}
-          mt={hp("4.7%")}
+          mt={hp('4.7%')}
           px={wp(5.4)}
           py={hp(1.6)}
           space={wp(3.2)}
@@ -90,8 +91,8 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           borderColor="#EBEEF2"
         >
           <Image
-            width={wp("21.333%")}
-            height={hp("10.41%")}
+            width={wp('21.333%')}
+            height={hp('10.41%')}
             resizeMode="contain"
             source={perfil}
             alt="Perfil"
@@ -112,7 +113,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           </VStack>
         </HStack>
 
-        <VStack mx={wp(5.4)} mt={hp("1.6%")}>
+        <VStack mx={wp(5.4)} mt={hp('1.6%')}>
           <IconButton height={hp(8.4)}>
             <Icon as={<Feather name="clock" />} size={6} color="text.300" />
             <VStack>
@@ -165,7 +166,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           </IconButton>
         </VStack>
 
-        <VStack mx={wp(5.4)} mt={hp("1.6%")}>
+        <VStack mx={wp(5.4)} mt={hp('1.6%')}>
           <Animated.View style={animatedStyleButton2}>
             <IconButton
               onPressIn={() => (pressedButton2.value = true)}
@@ -208,7 +209,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               onPressOut={() => (pressedButton.value = false)}
               height={hp(8.4)}
               onPress={() => {
-                navigation.navigate("View");
+                navigation.navigate('View');
               }}
             >
               <Icon as={<Feather name="eye" />} size={6} color="text.300" />

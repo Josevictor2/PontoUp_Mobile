@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useState } from "react";
+import { createContext, FC, ReactNode, useState } from 'react';
 
 export type ModalContext = {
   showModal: boolean;
@@ -19,7 +19,7 @@ export const ModalContextProvider: FC<ModalContextProviderProps> = ({
   children,
 }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [title, setTitle] = useState<string>("");
+  const [title, setTitle] = useState<string>('');
   const [modalStatus, setModalStatus] = useState<number>(0);
 
   return (

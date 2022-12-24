@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import { createContext, FC, ReactNode, useEffect, useState } from "react";
-import { Alert } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { authService } from "../services/service";
+import { createContext, FC, ReactNode, useEffect, useState } from 'react';
+import { Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export type User = Record<"token" | "name" | "device", string>;
+import { authService } from '@services/service';
+
+export type User = Record<'token' | 'name' | 'device', string>;
 
 type AuthContextType = {
   auth?: User;
@@ -30,7 +31,7 @@ export const AuthProvider: FC<AuthContextProviderProps> = ({ children }) => {
   async function loadStorageData(): Promise<void> {
     try {
       //Try get the data from Async Storage
-      const authDataSerialized = await AsyncStorage.getItem("@auth");
+      const authDataSerialized = await AsyncStorage.getItem('@auth');
       if (authDataSerialized) {
         //If there are data, it's converted to an Object and the state is updated.
         const _auth: User = JSON.parse(authDataSerialized);
@@ -46,15 +47,15 @@ export const AuthProvider: FC<AuthContextProviderProps> = ({ children }) => {
     try {
       const auth = await authService.signIn(password);
       setAuth(auth);
-      AsyncStorage.setItem("@auth", JSON.stringify(auth));
+      AsyncStorage.setItem('@auth', JSON.stringify(auth));
     } catch (error) {
-      Alert.alert("Erro", "wrong email or password");
+      Alert.alert('Erro', 'wrong email or password');
     }
   };
 
   const signOut = async () => {
     setAuth(undefined);
-    await AsyncStorage.removeItem("@auth");
+    await AsyncStorage.removeItem('@auth');
   };
 
   return (

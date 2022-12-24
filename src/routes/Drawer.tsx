@@ -1,11 +1,10 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import React from "react";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { CustomDrawer } from "../components/Drawer";
-import { HomeScreen } from "../screens/Home";
+import { CustomDrawer } from '@components/Drawer';
+import { HomeScreen } from '@screens/Home';
 
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 const Drawer = createDrawerNavigator();
 
@@ -17,7 +16,7 @@ export function DrawerRouter() {
         headerShown: false,
         drawerAllowFontScaling: true,
         drawerStyle: {
-          width: wp("89%"),
+          width: wp('89%'),
         },
       }}
     >

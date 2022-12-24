@@ -6,7 +6,7 @@ import {
   useDerivedValue,
   useSharedValue,
   withTiming,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 
 interface AnimationButton {
   valueScale?: number;
@@ -29,7 +29,7 @@ export const useAnimattion = (scaleTo?: AnimationButton) => {
       progress.value,
       [0, 1],
       [1, value],
-      Extrapolate.CLAMP
+      Extrapolate.CLAMP,
     );
 
     return {

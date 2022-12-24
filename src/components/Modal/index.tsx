@@ -1,7 +1,8 @@
-import { HStack, Modal, Text, VStack, Button, Slide } from "native-base";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
-import { useModal } from "../../hooks/useModal";
-import { useSubTitle } from "../helpers/useSubTitle";
+import { HStack, Modal, Text, VStack, Button, Slide } from 'native-base';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+
+import { useModal } from '@hooks/useModal';
+import { useSubTitle } from '@components/helpers/useSubTitle';
 
 export const ModalComponent = () => {
   const { showModal, setShowModal, title, modalStatus } = useModal();
@@ -22,7 +23,7 @@ export const ModalComponent = () => {
             h="100%"
             bg={{
               linearGradient: {
-                colors: ["#30663C", "#2C823F", "#30663C"],
+                colors: ['#30663C', '#2C823F', '#30663C'],
                 start: [0, 0],
                 end: [0.9, 0.3],
               },
@@ -52,10 +53,10 @@ export const ModalComponent = () => {
                 bg="rgba(48, 102, 60, 0.1)"
                 borderColor="rgba(48, 102, 60, 0.1)"
                 _text={{
-                  color: "text.300",
-                  fontSize: "md",
-                  fontFamily: "body",
-                  fontWeight: "400",
+                  color: 'text.300',
+                  fontSize: 'md',
+                  fontFamily: 'body',
+                  fontWeight: '400',
                 }}
               >
                 Cancelar
@@ -63,10 +64,10 @@ export const ModalComponent = () => {
               <Button
                 bg="text.300"
                 _text={{
-                  color: "white",
-                  fontSize: "md",
-                  fontFamily: "body",
-                  fontWeight: "400",
+                  color: 'white',
+                  fontSize: 'md',
+                  fontFamily: 'body',
+                  fontWeight: '400',
                 }}
                 width={wp(35)}
                 onPress={() => {

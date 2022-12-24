@@ -1,7 +1,9 @@
-import { VStack } from "native-base";
-import { Button } from "../../components/Button";
-import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import { useModal } from "../../hooks/useModal";
+import { VStack } from 'native-base';
+
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
+import { Button } from '@components/Button';
+import { useModal } from '@hooks/useModal';
 
 export const RegisterButtons = () => {
   const { setTitle, setShowModal, setModalStatus } = useModal();
@@ -19,7 +21,7 @@ export const RegisterButtons = () => {
         bg="#30663C26"
         color="text.300"
         onPress={() => {
-          setTitle("Iniciar expediente");
+          setTitle('Iniciar expediente');
           setShowModal(true);
           setModalStatus(0);
         }}
@@ -32,7 +34,7 @@ export const RegisterButtons = () => {
         bgPressed="info.500"
         color="#2D9DEF"
         onPress={() => {
-          setTitle("Registrar intervalo");
+          setTitle('Registrar intervalo');
           setShowModal(true);
           setModalStatus(1);
         }}
@@ -46,7 +48,7 @@ export const RegisterButtons = () => {
         bgPressed="yellow.600"
         color="#DF992F"
         onPress={() => {
-          setTitle("Registrar intervalo");
+          setTitle('Registrar intervalo');
           setShowModal(true);
           setModalStatus(2);
         }}
@@ -60,7 +62,7 @@ export const RegisterButtons = () => {
         bg="#D95D4226"
         color="#D95D42"
         onPress={() => {
-          setTitle("Finalizar expediente");
+          setTitle('Finalizar expediente');
           setShowModal(true);
           setModalStatus(3);
         }}

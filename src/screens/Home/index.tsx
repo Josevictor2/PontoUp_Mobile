@@ -1,3 +1,8 @@
+import Animated, { ZoomIn } from 'react-native-reanimated';
+import { Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerActions } from '@react-navigation/native';
+
 import {
   VStack,
   Text,
@@ -8,30 +13,26 @@ import {
   ScrollView,
   useDisclose,
   StatusBar,
-} from "native-base";
+} from 'native-base';
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+} from 'react-native-responsive-screen';
 
-import logo from "../../assets/images/pontoUplogo.png";
+import logo from '@assets/images/pontoUplogo.png';
 
 import {
   MaterialIcons,
   Feather,
   MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import { Pressable } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { DrawerActions } from "@react-navigation/native";
-import { IconButton } from "../../components/IconButton";
-import { FormJustify } from "../../components/ActionSheet";
-import Animated, { ZoomIn } from "react-native-reanimated";
-import { useAnimattion } from "../../hooks/useAnimation";
-import { useAnimattion as useButton } from "../../hooks/useAnimation";
-import { ModalComponent } from "../../components/Modal";
-import { RegisterButtons } from "../../components/RegisterPoints";
+} from '@expo/vector-icons';
+import { IconButton } from '@components/IconButton';
+import { FormJustify } from '@components/ActionSheet';
+import { ModalComponent } from '@components/Modal';
+import { RegisterButtons } from '@components/RegisterPoints';
+import { useAnimattion } from '@hooks/useAnimation';
+import { useAnimattion as useButton } from '@hooks/useAnimation';
 
 export const HomeScreen = () => {
   const { onOpen, isOpen, onClose } = useDisclose();
@@ -46,22 +47,22 @@ export const HomeScreen = () => {
   return (
     <ScrollView bg="#EBEEF2" flex={1}>
       <StatusBar
-        barStyle={"dark-content"}
+        barStyle={'dark-content'}
         translucent
         backgroundColor="#ffffff"
       />
       <VStack width="100%" safeArea>
         <VStack bg="#ffffff">
           <HStack
-            mt={hp("2.6%")}
-            px={wp("6.1%")}
+            mt={hp('2.6%')}
+            px={wp('6.1%')}
             alignItems="center"
             justifyContent="space-between"
           >
             <Animated.View entering={ZoomIn.duration(1500)}>
               <Image
-                width={wp("22.4%")}
-                height={hp("4.2%")}
+                width={wp('22.4%')}
+                height={hp('4.2%')}
                 resizeMode="contain"
                 source={logo}
                 alt="PontoUp"
@@ -87,7 +88,7 @@ export const HomeScreen = () => {
           <HStack
             mt={hp(3.6)}
             mb={hp(2.1)}
-            px={wp("6.1%")}
+            px={wp('6.1%')}
             alignItems="center"
             justifyContent="space-between"
           >
@@ -99,7 +100,7 @@ export const HomeScreen = () => {
                 color="text.200"
                 lineHeight={hp(2.9)}
               >
-                Olá,{" "}
+                Olá,{' '}
                 <Text fontWeight="400" bold>
                   Victor Gomes
                 </Text>
@@ -110,7 +111,7 @@ export const HomeScreen = () => {
                 fontSize="xs"
                 lineHeight={hp(2.2)}
               >
-                Matrícula:{" "}
+                Matrícula:{' '}
                 <Text bold fontWeight="400" color="text.200">
                   123456
                 </Text>
@@ -173,7 +174,7 @@ export const HomeScreen = () => {
                 onPressOut={() => (pressedButton.value = false)}
                 height={hp(8.4)}
                 onPress={() => {
-                  navigation.navigate("View");
+                  navigation.navigate('View');
                 }}
               >
                 <Icon as={<Feather name="eye" />} size={6} color="text.300" />

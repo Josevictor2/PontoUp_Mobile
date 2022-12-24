@@ -1,5 +1,12 @@
-import { Feather, MaterialIcons } from "@expo/vector-icons";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+
+import { Platform } from 'react-native';
+import Animated from 'react-native-reanimated';
+
+import { Feather, MaterialIcons } from '@expo/vector-icons';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import {
   Actionsheet,
   Box,
@@ -15,25 +22,21 @@ import {
   Text,
   TextArea,
   VStack,
-} from "native-base";
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+} from 'native-base';
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+} from 'react-native-responsive-screen';
 import DateTimePicker, {
   DateTimePickerEvent,
-} from "@react-native-community/datetimepicker";
+} from '@react-native-community/datetimepicker';
 
-import { ActionSchema } from "./shema";
-import { ActionProps } from "./types";
-import { IconButton } from "../IconButton";
-import { Platform } from "react-native";
-import Animated from "react-native-reanimated";
-import { useKeyboard } from "../../hooks/useKeyboard";
-import { useAnimattion } from "../../hooks/useAnimation";
+import { ActionSchema } from './shema';
+import { ActionProps } from './types';
+import { IconButton } from '../IconButton';
+import { useAnimattion } from '@hooks/useAnimation';
+import { useKeyboard } from '@hooks/useKeyboard';
 
 export const FormJustify = ({
   onClose,
@@ -45,16 +48,16 @@ export const FormJustify = ({
   const [showEnd, setShowEnd] = useState(false);
   const [dateEnd, setDateEnd] = useState<Date | undefined>(new Date());
 
-  const [textAreaValue, setTextAreaValue] = useState("");
+  const [textAreaValue, setTextAreaValue] = useState('');
 
-  const platform = Platform.OS === "ios" ? "padding" : "height";
+  const platform = Platform.OS === 'ios' ? 'padding' : 'height';
 
   const { animatedStyle, pressed } = useAnimattion();
   const { PressedKey } = useKeyboard();
 
   const onDateSelect = (
     event: DateTimePickerEvent,
-    dateInicio?: Date | undefined
+    dateInicio?: Date | undefined,
   ) => {
     setShow(false);
     setDate(dateInicio);
@@ -62,7 +65,7 @@ export const FormJustify = ({
 
   const onDateSelectEnd = (
     event: DateTimePickerEvent,
-    dateFinal: Date | undefined
+    dateFinal: Date | undefined,
   ) => {
     setShowEnd(false);
     setDateEnd(dateFinal);
@@ -123,7 +126,7 @@ export const FormJustify = ({
             </Pressable>
           </HStack>
           <ScrollView flex={1}>
-            <VStack mt={hp("3.8%")} space={2}>
+            <VStack mt={hp('3.8%')} space={2}>
               <Controller
                 control={control}
                 name="select"
@@ -141,31 +144,31 @@ export const FormJustify = ({
                       selectedValue={value}
                       accessibilityLabel="seletor de ocorrências"
                       _item={{
-                        bg: "secondary.50",
+                        bg: 'secondary.50',
                       }}
                       _selectedItem={{
-                        bg: "primary.900",
+                        bg: 'primary.900',
                         _text: {
-                          color: "text.100",
+                          color: 'text.100',
                         },
                       }}
                       _actionSheetContent={{
-                        bg: "secondary.50",
+                        bg: 'secondary.50',
                       }}
                       _actionSheetBody={{
-                        bg: "secondary.50",
+                        bg: 'secondary.50',
                       }}
                     >
                       <Select.Item
                         _text={{
-                          color: "text.50",
+                          color: 'text.50',
                         }}
                         label="Web Development"
                         value="0"
                       />
                       <Select.Item
                         _text={{
-                          color: "text.50",
+                          color: 'text.50',
                         }}
                         label="Cross Platform Development"
                         value="1"
@@ -188,7 +191,7 @@ export const FormJustify = ({
                   fontWeight="400"
                   fontSize="md"
                 >
-                  {" "}
+                  {' '}
                   Data Inicial
                 </Text>
                 <Icon
@@ -242,7 +245,7 @@ export const FormJustify = ({
               )}
 
               <TextArea
-                autoCompleteType={"off"}
+                autoCompleteType={'off'}
                 value={textAreaValue}
                 onChangeText={(text) => setTextAreaValue(text)}
               />

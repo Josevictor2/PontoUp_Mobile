@@ -1,5 +1,5 @@
-import { Button as NativeButton, IButtonProps } from "native-base";
-import { ColorType } from "native-base/lib/typescript/components/types";
+import { Button as NativeButton, IButtonProps } from 'native-base';
+import { ColorType } from 'native-base/lib/typescript/components/types';
 
 type Props = IButtonProps & {
   children: string;
@@ -17,17 +17,17 @@ export const Button = ({
   return (
     <NativeButton
       h={h || 12}
-      bg={bg || "primary.900"}
+      bg={bg || 'primary.900'}
       _text={{
         color: color,
-        fontFamily: "body",
-        fontWeight: "400",
-        fontSize: "lg",
+        fontFamily: 'body',
+        fontWeight: '400',
+        fontSize: 'lg',
       }}
       _pressed={{
-        bg: bgPressed || "green.900",
+        bg: bgPressed || 'green.900',
         _text: {
-          color: "white",
+          color: 'white',
         },
       }}
       {...props}

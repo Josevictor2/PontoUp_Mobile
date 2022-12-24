@@ -1,14 +1,13 @@
-import React from "react";
-
-import { HStack, Pressable, IPressableProps } from "native-base";
+import { ReactNode } from 'react';
+import { HStack, Pressable, IPressableProps } from 'native-base';
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+} from 'react-native-responsive-screen';
 
 type Props = IPressableProps & {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const IconButton = ({ children, height, ...props }: Props) => {

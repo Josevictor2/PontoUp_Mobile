@@ -1,4 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
+
+import Animated, {
+  BounceInLeft,
+  BounceInRight,
+  ZoomInLeft,
+} from 'react-native-reanimated';
+
 import {
   Box,
   Icon,
@@ -8,37 +15,37 @@ import {
   ScrollView,
   Text,
   VStack,
-} from "native-base";
+} from 'native-base';
+
+import { Platform } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+} from 'react-native-responsive-screen';
 
-import logo from "../../assets/images/pontoUplogo.png";
-import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from '@expo/vector-icons';
 
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { LoginProps } from "./types";
-import { LoginSchema } from "./schema";
-import { useAuth } from "../../hooks/useAuth";
-import { Footer } from "../../components/Footer";
-import { Platform } from "react-native";
-import Animated, {
-  BounceInLeft,
-  BounceInRight,
-  ZoomInLeft,
-} from "react-native-reanimated";
-import { useKeyboard } from "@hooks/useKeyboard";
+import logo from '@assets/images/pontoUplogo.png';
+
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { Input } from '@components/Input';
+import { Button } from '@components/Button';
+import { Footer } from '@components/Footer';
+
+import { useAuth } from '@hooks/useAuth';
+import { useKeyboard } from '@hooks/useKeyboard';
+
+import { LoginProps } from './types';
+import { LoginSchema } from './schema';
 
 export function LoginScreen() {
   const { signIn } = useAuth();
   const [show, setShow] = useState(false);
   const { PressedKey: isKeyboardOpen } = useKeyboard();
 
-  const platform = Platform.OS === "ios" ? "padding" : "height";
+  const platform = Platform.OS === 'ios' ? 'padding' : 'height';
 
   const marginTop = isKeyboardOpen ? hp(5) : hp(13);
 
@@ -65,8 +72,8 @@ export function LoginScreen() {
       >
         <Animated.View entering={BounceInRight.duration(1000)}>
           <Image
-            width={wp("40%")}
-            height={hp("8%")}
+            width={wp('40%')}
+            height={hp('8%')}
             resizeMode="contain"
             source={logo}
             alt="PontoUp"
@@ -77,7 +84,7 @@ export function LoginScreen() {
             borderRadius={8}
             borderWidth="1"
             borderColor="text.100"
-            w={wp("88%")}
+            w={wp('88%')}
             mt={marginTop}
             px={wp(8.5)}
             py={hp(4.2)}
@@ -96,7 +103,7 @@ export function LoginScreen() {
             </Animated.Text>
             <Animated.Text entering={ZoomInLeft.duration(1200)}>
               <Text
-                w={wp("75%")}
+                w={wp('75%')}
                 fontFamily="body"
                 fontWeight="300"
                 color="text.50"
@@ -107,7 +114,7 @@ export function LoginScreen() {
               </Text>
             </Animated.Text>
 
-            <VStack mt={hp("7.29%")} space={3}>
+            <VStack mt={hp('7.29%')} space={3}>
               <Controller
                 control={control}
                 name="password"
@@ -115,7 +122,7 @@ export function LoginScreen() {
                   <Animated.View entering={BounceInLeft.duration(1200)}>
                     <Input
                       keyboardType="numeric"
-                      type={show ? "text" : "password"}
+                      type={show ? 'text' : 'password'}
                       placeholder="Matrícula"
                       errorMessage={errors.password?.message}
                       onChangeText={onChange}
@@ -124,7 +131,7 @@ export function LoginScreen() {
                           <Icon
                             as={
                               <MaterialIcons
-                                name={show ? "visibility" : "visibility-off"}
+                                name={show ? 'visibility' : 'visibility-off'}
                               />
                             }
                             size={6}

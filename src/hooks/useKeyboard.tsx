@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
-import { Keyboard } from "react-native";
+import { useEffect, useState } from 'react';
+import { Keyboard } from 'react-native';
 
 export const useKeyboard = () => {
   const [PressedKey, setPressedKey] = useState(false);
 
-  const onSelectedKey = Keyboard.addListener("keyboardDidShow", () => {
+  const onSelectedKey = Keyboard.addListener('keyboardDidShow', () => {
     setPressedKey(true);
   });
 
-  const onUnselectedKey = Keyboard.addListener("keyboardDidHide", () => {
+  const onUnselectedKey = Keyboard.addListener('keyboardDidHide', () => {
     setPressedKey(false);
   });
 

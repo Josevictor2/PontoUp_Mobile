@@ -1,8 +1,9 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ViewRegisterScreen } from "../screens/ViewRegisterPoint";
-import { DrawerRouter } from "./Drawer";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export type AppParamList = Record<"Home" | "Drawer" | "View", undefined>;
+import { ViewRegisterScreen } from '@screens/ViewRegisterPoint';
+import { DrawerRouter } from './Drawer';
+
+export type AppParamList = Record<'Home' | 'Drawer' | 'View', undefined>;
 
 const Stack = createNativeStackNavigator<AppParamList>();
 

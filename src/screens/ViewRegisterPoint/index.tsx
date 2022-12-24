@@ -1,6 +1,7 @@
-import { VStack, Text } from "native-base";
-import { Button } from "../../components/Button";
-import { useAuth } from "../../hooks/useAuth";
+import { VStack, Text } from 'native-base';
+
+import { Button } from '@components/Button';
+import { useAuth } from '@hooks/useAuth';
 
 export const ViewRegisterScreen = () => {
   const { signOut } = useAuth();
