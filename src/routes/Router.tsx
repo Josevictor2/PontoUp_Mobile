@@ -5,10 +5,10 @@ import { AppStack } from "./AppStack";
 import { useAuth } from "../hooks/useAuth";
 
 export const Router = () => {
-    const { auth } = useAuth();
-    return (
-        <NavigationContainer>
-            {auth ? <AppStack /> : <AuthStack />}
-        </NavigationContainer>
-    );
+  const { auth } = useAuth();
+  return (
+    <NavigationContainer>
+      {auth ? <AppStack /> : <AuthStack />}
+    </NavigationContainer>
+  );
 };

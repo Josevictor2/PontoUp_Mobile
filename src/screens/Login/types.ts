@@ -1,3 +1,3 @@
 export type LoginProps = {
-    password: string;
-}
+  password: string;
+};

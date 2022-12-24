@@ -1,4 +1,4 @@
 export type ActionProps = {
-    select: string;
-    initData: Date;
-}
+  select: string;
+  initData: Date;
+};
