@@ -1,21 +1,23 @@
-import "react-native-gesture-handler";
-import React from "react";
-import { NativeBaseProvider } from "native-base";
-import useCachedResources from "./src/hooks/useCachedResources";
-import { StatusBar } from "react-native";
-import { theme } from "./src/theme";
-import { Router } from "./src/routes/Router";
-import { AuthProvider } from "./src/contexts/Auth";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
-import { ModalContextProvider } from "./src/contexts/Modal";
+import React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import 'react-native-gesture-handler';
+import { StatusBar } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+
+import { NativeBaseProvider } from 'native-base';
+
+import useCachedResources from './src/hooks/useCachedResources';
+import { theme } from './src/theme';
+import { Router } from './src/routes/Router';
+import { AuthProvider } from './src/contexts/Auth';
+import { ModalContextProvider } from './src/contexts/Modal';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
 
   const config = {
     dependencies: {
-      "linear-gradient": LinearGradient,
+      'linear-gradient': LinearGradient,
     },
   };
 
@@ -26,7 +28,7 @@ export default function App() {
       <NativeBaseProvider config={config} theme={theme}>
         <SafeAreaProvider>
           <StatusBar
-            barStyle={"dark-content"}
+            barStyle={'dark-content'}
             translucent
             backgroundColor="transparent"
           />
