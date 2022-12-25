@@ -6,24 +6,34 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import { NativeBaseProvider } from 'native-base';
 
-import useCachedResources from './src/hooks/useCachedResources';
+import { LoadingFonts } from './src/components/Loading';
 import { theme } from './src/theme';
 import { Router } from './src/routes/Router';
 import { AuthProvider } from './src/contexts/Auth';
 import { ModalContextProvider } from './src/contexts/Modal';
+import {
+  Sora_100Thin,
+  Sora_200ExtraLight,
+  Sora_300Light,
+  Sora_400Regular,
+  useFonts,
+} from '@expo-google-fonts/sora';
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
-
   const config = {
     dependencies: {
       'linear-gradient': LinearGradient,
     },
   };
 
+  const [isLoadingComplete] = useFonts({
+    Sora_100Thin,
+    Sora_200ExtraLight,
+    Sora_300Light,
+    Sora_400Regular,
+  });
+
   if (!isLoadingComplete) {
-    return null;
-  } else {
     return (
       <NativeBaseProvider config={config} theme={theme}>
         <SafeAreaProvider>
@@ -32,13 +42,26 @@ export default function App() {
             translucent
             backgroundColor="transparent"
           />
-          <AuthProvider>
-            <ModalContextProvider>
-              <Router />
-            </ModalContextProvider>
-          </AuthProvider>
+          <LoadingFonts />
         </SafeAreaProvider>
       </NativeBaseProvider>
     );
   }
+
+  return (
+    <NativeBaseProvider config={config} theme={theme}>
+      <SafeAreaProvider>
+        <StatusBar
+          barStyle={'dark-content'}
+          translucent
+          backgroundColor="transparent"
+        />
+        <AuthProvider>
+          <ModalContextProvider>
+            <Router />
+          </ModalContextProvider>
+        </AuthProvider>
+      </SafeAreaProvider>
+    </NativeBaseProvider>
+  );
 }
