@@ -9,17 +9,11 @@ export const RegisterButtons = () => {
   const { setTitle, setShowModal, setModalStatus } = useModal();
 
   return (
-    <VStack
-      mt="8px"
-      p="20px"
-      space={hp(1.2)}
-      bg="secondary.50"
-      borderRadius={8}
-    >
+    <VStack mt="8px" p="20px" space={hp(1.2)} bg="white" borderRadius={8}>
       <Button
         h={hp(6.2)}
-        bg="#30663C26"
-        color="text.300"
+        bg="primary.600"
+        color="primary.100"
         onPress={() => {
           setTitle('Iniciar expediente');
           setShowModal(true);
@@ -30,9 +24,9 @@ export const RegisterButtons = () => {
       </Button>
       <Button
         h={hp(6.2)}
-        bg="#3FA4EE26"
+        bg="blue.50"
         bgPressed="info.500"
-        color="#2D9DEF"
+        color="blue.200"
         onPress={() => {
           setTitle('Registrar intervalo');
           setShowModal(true);
@@ -44,9 +38,9 @@ export const RegisterButtons = () => {
 
       <Button
         h={hp(6.2)}
-        bg="#DF992F26"
+        bg="yellow.50"
         bgPressed="yellow.600"
-        color="#DF992F"
+        color="yellow.200"
         onPress={() => {
           setTitle('Registrar intervalo');
           setShowModal(true);
@@ -59,8 +53,8 @@ export const RegisterButtons = () => {
       <Button
         h={hp(6.2)}
         bgPressed="red.500"
-        bg="#D95D4226"
-        color="#D95D42"
+        bg="red.50"
+        color="red.200"
         onPress={() => {
           setTitle('Finalizar expediente');
           setShowModal(true);

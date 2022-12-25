@@ -83,7 +83,7 @@ export function LoginScreen() {
           <VStack
             borderRadius={8}
             borderWidth="1"
-            borderColor="text.100"
+            borderColor="gray.50"
             w={wp('88%')}
             mt={marginTop}
             px={wp(8.5)}
@@ -93,7 +93,7 @@ export function LoginScreen() {
               <Text
                 fontFamily="body"
                 fontWeight="400"
-                color="primary.900"
+                color="primary.100"
                 lineHeight={hp(4.7)}
                 fontSize="2xl"
                 mb={2}
@@ -106,7 +106,7 @@ export function LoginScreen() {
                 w={wp('75%')}
                 fontFamily="body"
                 fontWeight="300"
-                color="text.50"
+                color="gray.300"
                 lineHeight={hp(2.7)}
                 fontSize="sm"
               >

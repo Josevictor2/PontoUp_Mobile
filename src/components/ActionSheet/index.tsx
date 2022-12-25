@@ -45,9 +45,6 @@ export const FormJustify = ({
 }: IActionsheetProps) => {
   const [show, setShow] = useState(false);
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [showEnd, setShowEnd] = useState(false);
-  const [dateEnd, setDateEnd] = useState<Date | undefined>(new Date());
-
   const [textAreaValue, setTextAreaValue] = useState('');
 
   const platform = Platform.OS === 'ios' ? 'padding' : 'height';
@@ -61,14 +58,6 @@ export const FormJustify = ({
   ) => {
     setShow(false);
     setDate(dateInicio);
-  };
-
-  const onDateSelectEnd = (
-    event: DateTimePickerEvent,
-    dateFinal: Date | undefined,
-  ) => {
-    setShowEnd(false);
-    setDateEnd(dateFinal);
   };
 
   const {
@@ -101,10 +90,15 @@ export const FormJustify = ({
           alignItems="stretch"
           justifyItems="stretch"
           h={PressedKey ? hp(92) : hp(76)}
-          bg="secondary.50"
+          bg="white"
         >
           <HStack alignItems="center">
-            <Text fontSize="md" fontFamily="body" fontWeight="400">
+            <Text
+              color="secondary.50"
+              fontSize="md"
+              fontFamily="body"
+              fontWeight="400"
+            >
               Justificativa para ocorrência
             </Text>
             <Box flex={1} />
@@ -118,9 +112,13 @@ export const FormJustify = ({
                   borderRadius={4}
                   borderWidth="1"
                   p="8px"
-                  borderColor="text.100"
+                  borderColor="gray.50"
                 >
-                  <Icon as={<MaterialIcons name="close" />} size="24px" />
+                  <Icon
+                    as={<MaterialIcons name="close" />}
+                    color="gray.400"
+                    size="24px"
+                  />
                 </Box>
               </Animated.View>
             </Pressable>
@@ -133,7 +131,7 @@ export const FormJustify = ({
                 render={({ field: { onChange, value } }) => (
                   <FormControl isInvalid={!!errors.select}>
                     <Select
-                      borderColor="text.100"
+                      borderColor="gray.50"
                       borderRadius={8}
                       height={hp(6.2)}
                       fontFamily="body"
@@ -144,31 +142,31 @@ export const FormJustify = ({
                       selectedValue={value}
                       accessibilityLabel="seletor de ocorrências"
                       _item={{
-                        bg: 'secondary.50',
+                        bg: 'white',
                       }}
                       _selectedItem={{
-                        bg: 'primary.900',
+                        bg: 'primary.100',
                         _text: {
-                          color: 'text.100',
+                          color: 'gray.50',
                         },
                       }}
                       _actionSheetContent={{
-                        bg: 'secondary.50',
+                        bg: 'white',
                       }}
                       _actionSheetBody={{
-                        bg: 'secondary.50',
+                        bg: 'white',
                       }}
                     >
                       <Select.Item
                         _text={{
-                          color: 'text.50',
+                          color: 'gray.300',
                         }}
                         label="Web Development"
                         value="0"
                       />
                       <Select.Item
                         _text={{
-                          color: 'text.50',
+                          color: 'gray.300',
                         }}
                         label="Cross Platform Development"
                         value="1"
@@ -184,7 +182,7 @@ export const FormJustify = ({
               <IconButton height={hp(6.2)} onPress={() => setShow(true)}>
                 <Text
                   ml={3.5}
-                  color="#44484D"
+                  color="gray.300"
                   h={6}
                   mb={1}
                   fontFamily="body"
@@ -205,45 +203,13 @@ export const FormJustify = ({
               {show && (
                 <DateTimePicker
                   value={date || new Date()}
-                  maximumDate={dateEnd}
+                  //maximumDate={dateEnd}
                   mode="date"
                   display="default"
                   is24Hour={true}
                   onChange={onDateSelect}
                 />
               )}
-
-              <IconButton height={hp(6.2)} onPress={() => setShowEnd(true)}>
-                <Text
-                  ml={3.5}
-                  color="#44484D"
-                  h={6}
-                  mb={1}
-                  fontFamily="body"
-                  fontWeight="400"
-                  fontSize="md"
-                >
-                  Data Final
-                </Text>
-                <Icon
-                  as={Feather}
-                  ml="auto"
-                  name="calendar"
-                  size="md"
-                  color="text.300"
-                />
-              </IconButton>
-              {showEnd && (
-                <DateTimePicker
-                  minimumDate={date}
-                  value={dateEnd || new Date()}
-                  mode="date"
-                  display="default"
-                  is24Hour={true}
-                  onChange={onDateSelectEnd}
-                />
-              )}
-
               <TextArea
                 autoCompleteType={'off'}
                 value={textAreaValue}

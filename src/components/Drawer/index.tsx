@@ -72,9 +72,13 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 borderRadius={4}
                 borderWidth="1"
                 p="8px"
-                borderColor="text.100"
+                borderColor="gray.50"
               >
-                <Icon as={<MaterialIcons name="close" />} size="24px" />
+                <Icon
+                  as={<MaterialIcons name="close" />}
+                  color="secondary.100"
+                  size="24px"
+                />
               </Box>
             </Animated.View>
           </Pressable>
@@ -88,7 +92,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           space={wp(3.2)}
           alignItems="center"
           borderWidth={1}
-          borderColor="#EBEEF2"
+          borderColor="gray.50"
         >
           <Image
             width={wp('21.333%')}
@@ -103,23 +107,36 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               fontFamily="body"
               fontSize="sm"
               fontWeight="400"
-              bold
+              color="secondary.500"
             >
               Victor Gomes
             </Text>
-            <Text color="text.50" fontWeight="300" fontSize="xs">
-              Matricula: <Text bold>123456</Text>
+            <Text
+              color="gray.300"
+              fontFamily="body"
+              fontWeight="300"
+              fontSize="xs"
+            >
+              Matricula:{' '}
+              <Text
+                fontWeight="400"
+                fontFamily="body"
+                fontSize="xs"
+                color="secondary.500"
+              >
+                123456
+              </Text>
             </Text>
           </VStack>
         </HStack>
 
         <VStack mx={wp(5.4)} mt={hp('1.6%')}>
           <IconButton height={hp(8.4)}>
-            <Icon as={<Feather name="clock" />} size={6} color="text.300" />
+            <Icon as={<Feather name="clock" />} size={6} color="gray.400" />
             <VStack>
               <Text
                 ml={3.5}
-                color="#44484D"
+                color="secondary.100"
                 h={6}
                 fontFamily="body"
                 fontWeight="400"
@@ -127,7 +144,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               >
                 Meus horários
               </Text>
-              <Text ml={3.5} color="#767A80" fontSize="xs">
+              <Text ml={3.5} color="gray.400" fontSize="xs">
                 Meus horários de entrada
               </Text>
             </VStack>
@@ -136,15 +153,15 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               ml="auto"
               name="chevron-right"
               size="sm"
-              color="text.300"
+              color="gray.200"
             />
           </IconButton>
           <IconButton height={hp(8.4)}>
-            <Icon as={<Feather name="file-text" />} size={6} color="text.300" />
+            <Icon as={<Feather name="file-text" />} size={6} color="gray.400" />
             <VStack>
               <Text
                 ml={3.5}
-                color="#44484D"
+                color="secondary.100"
                 h={6}
                 fontFamily="body"
                 fontWeight="400"
@@ -152,7 +169,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               >
                 Meus dados
               </Text>
-              <Text ml={3.5} color="#767A80" fontSize="xs">
+              <Text ml={3.5} color="gray.400" fontSize="xs">
                 Minhas informações da conta
               </Text>
             </VStack>
@@ -161,7 +178,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               ml="auto"
               name="chevron-right"
               size="sm"
-              color="text.300"
+              color="gray.200"
             />
           </IconButton>
         </VStack>
@@ -180,11 +197,11 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               <Icon
                 as={<MaterialCommunityIcons name="calendar-clock-outline" />}
                 size={6}
-                color="text.300"
+                color="gray.400"
               />
               <Text
                 ml={3.5}
-                color="#44484D"
+                color="secondary.100"
                 h={6}
                 mb={1}
                 fontFamily="body"
@@ -198,7 +215,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 ml="auto"
                 name="chevron-right"
                 size="sm"
-                color="text.300"
+                color="gray.200"
               />
             </IconButton>
           </Animated.View>
@@ -212,10 +229,10 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 navigation.navigate('View');
               }}
             >
-              <Icon as={<Feather name="eye" />} size={6} color="text.300" />
+              <Icon as={<Feather name="eye" />} size={6} color="gray.400" />
               <Text
                 ml={3.5}
-                color="#44484D"
+                color="secondary.100"
                 h={6}
                 mb={1}
                 fontFamily="body"
@@ -229,7 +246,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 ml="auto"
                 name="chevron-right"
                 size="sm"
-                color="text.300"
+                color="gray.200"
               />
             </IconButton>
           </Animated.View>
@@ -238,11 +255,11 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
             <Icon
               as={<SimpleLineIcons name="logout" />}
               size={6}
-              color="#EC3539"
+              color="red.300"
             />
             <Text
               ml={3.5}
-              color="#EC3539"
+              color="red.300"
               h={6}
               mb={1}
               fontFamily="body"

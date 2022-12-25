@@ -45,14 +45,14 @@ export const HomeScreen = () => {
     useButton({ valueScale: 1.1 });
 
   return (
-    <ScrollView bg="#EBEEF2" flex={1}>
+    <ScrollView bg="gray.50" flex={1}>
       <StatusBar
         barStyle={'dark-content'}
         translucent
-        backgroundColor="#ffffff"
+        backgroundColor="white"
       />
       <VStack width="100%" safeArea>
-        <VStack bg="#ffffff">
+        <VStack bg="white">
           <HStack
             mt={hp('2.6%')}
             px={wp('6.1%')}
@@ -78,7 +78,7 @@ export const HomeScreen = () => {
                   borderRadius={4}
                   borderWidth="1"
                   p="8px"
-                  borderColor="text.100"
+                  borderColor="gray.50"
                 >
                   <Icon as={<MaterialIcons name="menu" />} size="24px" />
                 </Box>
@@ -97,7 +97,7 @@ export const HomeScreen = () => {
                 fontFamily="body"
                 fontWeight="300"
                 fontSize="md"
-                color="text.200"
+                color="secondary.500"
                 lineHeight={hp(2.9)}
               >
                 Olá,{' '}
@@ -108,11 +108,12 @@ export const HomeScreen = () => {
               <Text
                 fontFamily="body"
                 fontWeight="300"
+                color="gray.300"
                 fontSize="xs"
                 lineHeight={hp(2.2)}
               >
                 Matrícula:{' '}
-                <Text bold fontWeight="400" color="text.200">
+                <Text bold fontWeight="400" color="secondary.500">
                   123456
                 </Text>
               </Text>
@@ -121,6 +122,7 @@ export const HomeScreen = () => {
               <Text
                 fontFamily="body"
                 fontWeight="400"
+                color="gray.300"
                 fontSize="2xs"
                 lineHeight={hp(1.8)}
               >
@@ -130,7 +132,7 @@ export const HomeScreen = () => {
                 fontFamily="body"
                 fontWeight="400"
                 fontSize="xs"
-                bold
+                color="secondary.400"
                 lineHeight={hp(2.1)}
               >
                 00:00
@@ -151,7 +153,7 @@ export const HomeScreen = () => {
               fontWeight="300"
               fontSize="xl"
               lineHeight={hp(3.6)}
-              bold
+              color="secondary.400"
             >
               Registrar Ponto
             </Text>
@@ -160,6 +162,7 @@ export const HomeScreen = () => {
               fontWeight="400"
               fontSize="xs"
               lineHeight={hp(2.2)}
+              color="gray.400"
             >
               12/11/2022 às 21:07 min
             </Text>
@@ -177,10 +180,10 @@ export const HomeScreen = () => {
                   navigation.navigate('View');
                 }}
               >
-                <Icon as={<Feather name="eye" />} size={6} color="text.300" />
+                <Icon as={<Feather name="eye" />} size={6} color="gray.400" />
                 <Text
                   ml={3.5}
-                  color="#44484D"
+                  color="secondary.100"
                   h={6}
                   mb={1}
                   fontFamily="body"
@@ -194,7 +197,7 @@ export const HomeScreen = () => {
                   ml="auto"
                   name="chevron-right"
                   size="sm"
-                  color="text.300"
+                  color="gray.100"
                 />
               </IconButton>
             </Animated.View>
@@ -204,15 +207,16 @@ export const HomeScreen = () => {
                 onPressOut={() => (pressedButton2.value = false)}
                 height={hp(8.4)}
                 onPress={onOpen}
+                mb="10px"
               >
                 <Icon
                   as={<MaterialCommunityIcons name="calendar-clock-outline" />}
                   size={6}
-                  color="text.300"
+                  color="gray.400"
                 />
                 <Text
                   ml={3.5}
-                  color="#44484D"
+                  color="secondary.100"
                   h={6}
                   mb={1}
                   fontFamily="body"
@@ -226,7 +230,7 @@ export const HomeScreen = () => {
                   ml="auto"
                   name="chevron-right"
                   size="sm"
-                  color="text.300"
+                  color="gray.100"
                 />
               </IconButton>
             </Animated.View>

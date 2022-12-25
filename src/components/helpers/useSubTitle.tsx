@@ -6,7 +6,7 @@ export const useSubTitle = () => {
       <Text
         textAlign="center"
         maxW="284px"
-        color="secondary.50"
+        color="white"
         fontFamily="body"
         fontSize="sm"
       >
@@ -20,7 +20,7 @@ export const useSubTitle = () => {
       <Text
         textAlign="center"
         maxW="284px"
-        color="secondary.50"
+        color="white"
         fontFamily="body"
         fontSize="sm"
       >
@@ -34,7 +34,7 @@ export const useSubTitle = () => {
       <Text
         textAlign="center"
         maxW="284px"
-        color="secondary.50"
+        color="white"
         fontFamily="body"
         fontSize="sm"
       >
@@ -48,7 +48,7 @@ export const useSubTitle = () => {
       <Text
         textAlign="center"
         maxW="274px"
-        color="secondary.50"
+        color="white"
         fontFamily="body"
         fontSize="sm"
       >

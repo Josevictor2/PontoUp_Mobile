@@ -17,7 +17,7 @@ export const Button = ({
   return (
     <NativeButton
       h={h || 12}
-      bg={bg || 'primary.900'}
+      bg={bg || 'primary.100'}
       _text={{
         color: color,
         fontFamily: 'body',
@@ -25,7 +25,7 @@ export const Button = ({
         fontSize: 'lg',
       }}
       _pressed={{
-        bg: bgPressed || 'green.900',
+        bg: bgPressed || 'primary.100',
         _text: {
           color: 'white',
         },

@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 import { HStack, Pressable, IPressableProps } from 'native-base';
 
 import {
@@ -15,9 +16,9 @@ export const IconButton = ({ children, height, ...props }: Props) => {
     <Pressable {...props}>
       <HStack
         h={height}
-        bg="#ffffff"
+        bg="white"
         borderWidth={1}
-        borderColor="#EBEEF2"
+        borderColor="gray.50"
         alignItems="center"
         justifyContent="center"
         mt={hp(1.2)}

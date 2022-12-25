@@ -12,13 +12,13 @@ export const Input = ({ errorMessage, isInvalid, ...props }: Props) => {
       <NativeInput
         fontSize="md"
         h={12}
-        borderColor="primary.900"
+        borderColor="primary.100"
         isInvalid={invalid}
         borderWidth={2}
         {...props}
         _focus={{
-          bg: 'secondary.50',
-          borderColor: 'primary.900',
+          bg: 'white',
+          borderColor: 'primary.100',
         }}
       />
       <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>

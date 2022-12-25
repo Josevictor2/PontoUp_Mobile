@@ -30,7 +30,7 @@ export const ModalComponent = () => {
             }}
           >
             <VStack space={2} justifyItems="center" alignItems="center">
-              <Text color="secondary.50" fontFamily="body" fontSize="lg">
+              <Text color="#F8F2FA" fontFamily="body" fontSize="lg">
                 {title}
               </Text>
               {modalStatus === 0 && sub0()}
@@ -39,7 +39,7 @@ export const ModalComponent = () => {
               {modalStatus === 3 && sub3()}
             </VStack>
           </Modal.Body>
-          <Modal.Footer bg="secondary.50">
+          <Modal.Footer bg="white">
             <HStack
               flex={1}
               justifyContent="center"
@@ -50,10 +50,10 @@ export const ModalComponent = () => {
                 width={wp(35)}
                 variant="outline"
                 onPress={() => setShowModal(false)}
-                bg="rgba(48, 102, 60, 0.1)"
-                borderColor="rgba(48, 102, 60, 0.1)"
+                bg="primary.700"
+                borderColor="primary.700"
                 _text={{
-                  color: 'text.300',
+                  color: 'primary.100',
                   fontSize: 'md',
                   fontFamily: 'body',
                   fontWeight: '400',
@@ -62,7 +62,7 @@ export const ModalComponent = () => {
                 Cancelar
               </Button>
               <Button
-                bg="text.300"
+                bg="primary.100"
                 _text={{
                   color: 'white',
                   fontSize: 'md',
