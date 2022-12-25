@@ -1201,6 +1201,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@expo-google-fonts/sora@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/sora/-/sora-0.2.2.tgz#bfac5c9775c441b8393246e22cc208ed2912ad31"
+  integrity sha512-3OWeEbYFiKeK8gpvvpzRqCD32kJxrpjo+IfbXY+xKkph4p8IhIcGNmiNAdsoubshkbMkZiQt7aR3xJe4HF1Q5w==
+
 "@expo/apple-utils@0.0.0-alpha.31":
   version "0.0.0-alpha.31"
   resolved "https://registry.yarnpkg.com/@expo/apple-utils/-/apple-utils-0.0.0-alpha.31.tgz#ab18640c384ba4b088e4490977a12f6f41a1e2a0"
