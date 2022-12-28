@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Animated, {
   BounceInLeft,
   BounceInRight,
@@ -17,49 +15,35 @@ import {
   VStack,
 } from 'native-base';
 
-import { Platform } from 'react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-
 import { MaterialIcons } from '@expo/vector-icons';
 
 import logo from '@assets/images/pontoUplogo.png';
 
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { Controller } from 'react-hook-form';
 
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { Footer } from '@components/Footer';
 
-import { useAuth } from '@hooks/useAuth';
-import { useKeyboard } from '@hooks/useKeyboard';
-
-import { LoginProps } from './types';
-import { LoginSchema } from './schema';
+import { useLogin } from './useSignIn';
+import { useAnimattion } from '@hooks/useAnimation';
 
 export function LoginScreen() {
-  const { signIn } = useAuth();
-  const [show, setShow] = useState(false);
-  const { PressedKey: isKeyboardOpen } = useKeyboard();
-
-  const platform = Platform.OS === 'ios' ? 'padding' : 'height';
-
-  const marginTop = isKeyboardOpen ? hp(5) : hp(13);
-
   const {
+    FontSize,
+    SubmitLogin,
     control,
+    errors,
     handleSubmit,
-    formState: { errors },
-  } = useForm<LoginProps>({
-    resolver: yupResolver(LoginSchema),
-  });
+    hp,
+    marginTop,
+    platform,
+    toogleShow,
+    show,
+    wp,
+  } = useLogin();
 
-  const SubmitLogin = (data: LoginProps) => {
-    signIn(data.password);
-  };
+  const { animatedStyle, pressed } = useAnimattion({ valueScale: 1.1 });
 
   return (
     <VStack flex={1} width="100%" px={wp(6.4)} mt={hp(4.2)} safeArea>
@@ -95,7 +79,7 @@ export function LoginScreen() {
                 fontWeight="400"
                 color="primary.100"
                 lineHeight={hp(4.7)}
-                fontSize="2xl"
+                fontSize={FontSize(24)}
                 mb={2}
               >
                 Fazer Login
@@ -103,12 +87,11 @@ export function LoginScreen() {
             </Animated.Text>
             <Animated.Text entering={ZoomInLeft.duration(1200)}>
               <Text
-                w={wp('75%')}
                 fontFamily="body"
                 fontWeight="300"
                 color="gray.300"
                 lineHeight={hp(2.7)}
-                fontSize="sm"
+                fontSize={FontSize(14)}
               >
                 Seja bem-vindo(a)! Insira sua matrícula para entrar na conta.
               </Text>
@@ -127,7 +110,7 @@ export function LoginScreen() {
                       errorMessage={errors.password?.message}
                       onChangeText={onChange}
                       InputRightElement={
-                        <Pressable onPress={() => setShow(!show)}>
+                        <Pressable onPress={toogleShow}>
                           <Icon
                             as={
                               <MaterialIcons
@@ -143,11 +126,17 @@ export function LoginScreen() {
                   </Animated.View>
                 )}
               />
-              <Animated.View entering={BounceInRight.duration(1200)}>
+              <Animated.View
+                entering={BounceInRight.duration(1200)}
+                style={animatedStyle}
+              >
                 <Button
                   color="white"
+                  bgPressed="green.900"
                   onPress={handleSubmit(SubmitLogin)}
                   mt={hp(4.2)}
+                  onPressIn={() => (pressed.value = true)}
+                  onPressOut={() => (pressed.value = false)}
                 >
                   Entrar na conta
                 </Button>
