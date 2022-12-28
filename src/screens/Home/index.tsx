@@ -1,15 +1,11 @@
-import Animated, { ZoomIn } from 'react-native-reanimated';
-import { Pressable } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
-import { DrawerActions } from '@react-navigation/native';
 
 import {
   VStack,
   Text,
   HStack,
-  Image,
   Icon,
-  Box,
   ScrollView,
   useDisclose,
   StatusBar,
@@ -20,25 +16,21 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-import logo from '@assets/images/pontoUplogo.png';
-
-import {
-  MaterialIcons,
-  Feather,
-  MaterialCommunityIcons,
-} from '@expo/vector-icons';
+import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import { IconButton } from '@components/IconButton';
 import { FormJustify } from '@components/ActionSheet';
 import { ModalComponent } from '@components/Modal';
 import { RegisterButtons } from '@components/RegisterPoints';
-import { useAnimattion } from '@hooks/useAnimation';
+
 import { useAnimattion as useButton } from '@hooks/useAnimation';
+import { Header } from '@components/Header';
+import { useFontSize } from '@theme/responsiveFontSize';
 
 export const HomeScreen = () => {
   const { onOpen, isOpen, onClose } = useDisclose();
   const navigation = useNavigation();
+  const { FontSize } = useFontSize();
 
-  const { pressed, animatedStyle } = useAnimattion();
   const { pressed: pressedButton, animatedStyle: animatedStyleButton } =
     useButton({ valueScale: 1.1 });
   const { pressed: pressedButton2, animatedStyle: animatedStyleButton2 } =
@@ -53,38 +45,7 @@ export const HomeScreen = () => {
       />
       <VStack width="100%" safeArea>
         <VStack bg="white">
-          <HStack
-            mt={hp('2.6%')}
-            px={wp('6.1%')}
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Animated.View entering={ZoomIn.duration(1500)}>
-              <Image
-                width={wp('22.4%')}
-                height={hp('4.2%')}
-                resizeMode="contain"
-                source={logo}
-                alt="PontoUp"
-              />
-            </Animated.View>
-            <Pressable
-              onPressIn={() => (pressed.value = true)}
-              onPressOut={() => (pressed.value = false)}
-              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-            >
-              <Animated.View style={animatedStyle}>
-                <Box
-                  borderRadius={4}
-                  borderWidth="1"
-                  p="8px"
-                  borderColor="gray.50"
-                >
-                  <Icon as={<MaterialIcons name="menu" />} size="24px" />
-                </Box>
-              </Animated.View>
-            </Pressable>
-          </HStack>
+          <Header />
           <HStack
             mt={hp(3.6)}
             mb={hp(2.1)}
@@ -96,7 +57,7 @@ export const HomeScreen = () => {
               <Text
                 fontFamily="body"
                 fontWeight="300"
-                fontSize="md"
+                fontSize={FontSize(14)}
                 color="secondary.500"
                 lineHeight={hp(2.9)}
               >
