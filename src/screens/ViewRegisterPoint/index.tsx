@@ -1,7 +1,13 @@
-import { Button, VStack } from 'native-base';
+import { HStack, VStack, Text, Box } from 'native-base';
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 import { Header } from '@components/Header';
-import { useAuth } from '@hooks/useAuth';
+import { useFontSize } from '@theme/responsiveFontSize';
+import { ArrowLeft } from '@assets/Svg/arrowLeft';
 //import { RenderItem } from '@components/RenderItem';
 
 const data = [
@@ -25,12 +31,24 @@ const data = [
 ];
 
 export const ViewRegisterScreen = () => {
-  const { signOut } = useAuth();
+  const { FontSize } = useFontSize();
   return (
     <VStack h="100%" flex={1} safeArea>
       <VStack bg="white" flex={1}>
         <Header />
-        <Button onPress={() => signOut()}>sair</Button>
+        <HStack
+          px={wp('6.1%')}
+          flex={1}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <ArrowLeft />
+          <Box flexGrow={1} />
+          <Text fontFamily="body" fontWeight="400" fontSize={FontSize(16)}>
+            Visualizar frequência
+          </Text>
+          <Box flexGrow={1} />
+        </HStack>
       </VStack>
       <VStack bg="blue.300" flex={5} />
     </VStack>
