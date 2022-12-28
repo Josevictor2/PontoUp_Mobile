@@ -5,6 +5,7 @@ import { CustomDrawer } from '@components/Drawer';
 import { HomeScreen } from '@screens/Home';
 
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { ViewRegisterScreen } from '@screens/ViewRegisterPoint';
 
 const Drawer = createDrawerNavigator();
 
@@ -21,6 +22,7 @@ export function DrawerRouter() {
       }}
     >
       <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="View" component={ViewRegisterScreen} />
     </Drawer.Navigator>
   );
 }
