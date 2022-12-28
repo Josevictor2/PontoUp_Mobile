@@ -35,9 +35,11 @@ import { useAnimattion } from '@hooks/useAnimation';
 import { useAnimattion as useButton } from '@hooks/useAnimation';
 import { FormJustify } from '@components/ActionSheet';
 import { IconButton } from '@components/IconButton';
+import { useFontSize } from '@theme/responsiveFontSize';
 
 export const CustomDrawer = (props: DrawerContentComponentProps) => {
   const navigation = useNavigation();
+  const { FontSize } = useFontSize();
   const { animatedStyle, pressed } = useAnimattion();
   const { pressed: pressedButton, animatedStyle: animatedStyleButton } =
     useButton({ valueScale: 1.1 });
@@ -105,7 +107,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
             <Text
               mb={hp(1.6)}
               fontFamily="body"
-              fontSize="sm"
+              fontSize={FontSize(14)}
               fontWeight="400"
               color="secondary.500"
             >
@@ -115,13 +117,13 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               color="gray.300"
               fontFamily="body"
               fontWeight="300"
-              fontSize="xs"
+              fontSize={FontSize(12)}
             >
               Matricula:{' '}
               <Text
                 fontWeight="400"
                 fontFamily="body"
-                fontSize="xs"
+                fontSize={FontSize(12)}
                 color="secondary.500"
               >
                 123456
@@ -140,11 +142,11 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 h={6}
                 fontFamily="body"
                 fontWeight="400"
-                fontSize="sm"
+                fontSize={FontSize(14)}
               >
                 Meus horários
               </Text>
-              <Text ml={3.5} color="gray.400" fontSize="xs">
+              <Text ml={3.5} color="gray.400" fontSize={FontSize(12)}>
                 Meus horários de entrada
               </Text>
             </VStack>
@@ -152,7 +154,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               as={Feather}
               ml="auto"
               name="chevron-right"
-              size="sm"
+              size={4}
               color="gray.200"
             />
           </IconButton>
@@ -165,11 +167,11 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 h={6}
                 fontFamily="body"
                 fontWeight="400"
-                fontSize="sm"
+                fontSize={FontSize(14)}
               >
                 Meus dados
               </Text>
-              <Text ml={3.5} color="gray.400" fontSize="xs">
+              <Text ml={3.5} color="gray.400" fontSize={FontSize(12)}>
                 Minhas informações da conta
               </Text>
             </VStack>
@@ -177,7 +179,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               as={Feather}
               ml="auto"
               name="chevron-right"
-              size="sm"
+              size={4}
               color="gray.200"
             />
           </IconButton>
@@ -206,7 +208,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 mb={1}
                 fontFamily="body"
                 fontWeight="400"
-                fontSize="md"
+                fontSize={FontSize(16)}
               >
                 Justificar falta
               </Text>
@@ -214,7 +216,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 as={Feather}
                 ml="auto"
                 name="chevron-right"
-                size="sm"
+                size={4}
                 color="gray.200"
               />
             </IconButton>
@@ -237,7 +239,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 mb={1}
                 fontFamily="body"
                 fontWeight="400"
-                fontSize="md"
+                fontSize={FontSize(16)}
               >
                 Visualizar Frequência
               </Text>
@@ -245,7 +247,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 as={Feather}
                 ml="auto"
                 name="chevron-right"
-                size="sm"
+                size={4}
                 color="gray.200"
               />
             </IconButton>
@@ -264,7 +266,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               mb={1}
               fontFamily="body"
               fontWeight="400"
-              fontSize="md"
+              fontSize={FontSize(16)}
             >
               Sair do sistema
             </Text>
@@ -272,7 +274,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
               as={Feather}
               ml="auto"
               name="chevron-right"
-              size="sm"
+              size={4}
               color="white"
             />
           </IconButton>

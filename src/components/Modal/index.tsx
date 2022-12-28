@@ -3,10 +3,12 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 import { useModal } from '@hooks/useModal';
 import { useSubTitle } from '@components/helpers/useSubTitle';
+import { useFontSize } from '@theme/responsiveFontSize';
 
 export const ModalComponent = () => {
   const { showModal, setShowModal, title, modalStatus } = useModal();
   const { sub0, sub1, sub2, sub3 } = useSubTitle();
+  const { FontSize } = useFontSize();
 
   return (
     <Modal safeArea isOpen={showModal} onClose={() => setShowModal(false)}>
@@ -30,7 +32,7 @@ export const ModalComponent = () => {
             }}
           >
             <VStack space={2} justifyItems="center" alignItems="center">
-              <Text color="#F8F2FA" fontFamily="body" fontSize="lg">
+              <Text color="#F8F2FA" fontFamily="body" fontSize={FontSize(18)}>
                 {title}
               </Text>
               {modalStatus === 0 && sub0()}
@@ -54,7 +56,7 @@ export const ModalComponent = () => {
                 borderColor="primary.700"
                 _text={{
                   color: 'primary.100',
-                  fontSize: 'md',
+                  fontSize: { base: 'md', md: 'lg' },
                   fontFamily: 'body',
                   fontWeight: '400',
                 }}
@@ -65,7 +67,7 @@ export const ModalComponent = () => {
                 bg="primary.100"
                 _text={{
                   color: 'white',
-                  fontSize: 'md',
+                  fontSize: { base: 'md', md: 'lg' },
                   fontFamily: 'body',
                   fontWeight: '400',
                 }}

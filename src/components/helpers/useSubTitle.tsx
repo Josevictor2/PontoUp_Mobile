@@ -1,6 +1,8 @@
+import { useFontSize } from '@theme/responsiveFontSize';
 import { Text } from 'native-base';
 
 export const useSubTitle = () => {
+  const { FontSize } = useFontSize();
   const sub0 = () => {
     return (
       <Text
@@ -8,7 +10,7 @@ export const useSubTitle = () => {
         maxW="284px"
         color="white"
         fontFamily="body"
-        fontSize="sm"
+        fontSize={FontSize(14)}
       >
         Deseja <Text bold>registrar o ínicio</Text> do expediente?
       </Text>
@@ -22,7 +24,7 @@ export const useSubTitle = () => {
         maxW="284px"
         color="white"
         fontFamily="body"
-        fontSize="sm"
+        fontSize={FontSize(14)}
       >
         Deseja <Text bold>registrar o ínicio</Text> do intervalo?
       </Text>
@@ -36,7 +38,7 @@ export const useSubTitle = () => {
         maxW="284px"
         color="white"
         fontFamily="body"
-        fontSize="sm"
+        fontSize={FontSize(14)}
       >
         Deseja <Text bold>registrar o fim</Text> do intervalo?
       </Text>
@@ -50,7 +52,7 @@ export const useSubTitle = () => {
         maxW="274px"
         color="white"
         fontFamily="body"
-        fontSize="sm"
+        fontSize={FontSize(14)}
       >
         Deseja <Text bold>finalizar o expediente</Text>? Essa ação é
         irrevessível.

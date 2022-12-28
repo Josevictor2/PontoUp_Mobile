@@ -37,6 +37,7 @@ import { ActionProps } from './types';
 import { IconButton } from '../IconButton';
 import { useAnimattion } from '@hooks/useAnimation';
 import { useKeyboard } from '@hooks/useKeyboard';
+import { useFontSize } from '@theme/responsiveFontSize';
 
 export const FormJustify = ({
   onClose,
@@ -51,6 +52,7 @@ export const FormJustify = ({
 
   const { animatedStyle, pressed } = useAnimattion();
   const { PressedKey } = useKeyboard();
+  const { FontSize } = useFontSize();
 
   const onDateSelect = (
     event: DateTimePickerEvent,
@@ -95,7 +97,7 @@ export const FormJustify = ({
           <HStack alignItems="center">
             <Text
               color="secondary.50"
-              fontSize="md"
+              fontSize={FontSize(16)}
               fontFamily="body"
               fontWeight="400"
             >
@@ -136,7 +138,7 @@ export const FormJustify = ({
                       height={hp(6.2)}
                       fontFamily="body"
                       fontWeight="300"
-                      fontSize="md"
+                      fontSize={FontSize(16)}
                       onValueChange={onChange}
                       placeholder="Selecione uma opção"
                       selectedValue={value}
@@ -187,7 +189,7 @@ export const FormJustify = ({
                   mb={1}
                   fontFamily="body"
                   fontWeight="400"
-                  fontSize="md"
+                  fontSize={FontSize(16)}
                 >
                   {' '}
                   Data Inicial

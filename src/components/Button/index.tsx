@@ -1,3 +1,4 @@
+import { useFontSize } from '@theme/responsiveFontSize';
 import { Button as NativeButton, IButtonProps } from 'native-base';
 import { ColorType } from 'native-base/lib/typescript/components/types';
 
@@ -14,6 +15,7 @@ export const Button = ({
   h,
   ...props
 }: Props) => {
+  const { FontSize } = useFontSize();
   return (
     <NativeButton
       h={h || 12}
@@ -22,7 +24,12 @@ export const Button = ({
         color: color,
         fontFamily: 'body',
         fontWeight: '400',
-        fontSize: 'lg',
+        fontSize: {
+          base: FontSize(18),
+          md: FontSize(16),
+          sm: FontSize(14),
+          xl: FontSize(12),
+        },
       }}
       _pressed={{
         bg: bgPressed || 'primary.100',
