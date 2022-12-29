@@ -1,5 +1,4 @@
 import { useNavigation, DrawerActions } from '@react-navigation/native';
-import Animated from 'react-native-reanimated';
 
 import {
   DrawerContentComponentProps,
@@ -31,20 +30,28 @@ import {
 import logo from '@assets/images/pontoUplogo.png';
 import perfil from '@assets/images/perfil.png';
 
-import { useAnimattion } from '@hooks/useAnimation';
-import { useAnimattion as useButton } from '@hooks/useAnimation';
 import { FormJustify } from '@components/ActionSheet';
 import { IconButton } from '@components/IconButton';
 import { useFontSize } from '@theme/responsiveFontSize';
+import { MotiView } from 'moti';
+import { useMotiScale } from '@hooks/useMotiScale';
+import { useAuth } from '@hooks/useAuth';
 
 export const CustomDrawer = (props: DrawerContentComponentProps) => {
   const navigation = useNavigation();
   const { FontSize } = useFontSize();
-  const { animatedStyle, pressed } = useAnimattion();
-  const { pressed: pressedButton, animatedStyle: animatedStyleButton } =
-    useButton({ valueScale: 1.1 });
-  const { pressed: pressedButton2, animatedStyle: animatedStyleButton2 } =
-    useButton({ valueScale: 1.1 });
+  const { signOut } = useAuth();
+
+  const { handleToogle, toogleAnimation } = useMotiScale({ scale: 1.3 });
+
+  const { handleToogle: handleToogle2, toogleAnimation: toogleAnimation2 } =
+    useMotiScale({ scale: 1.1 });
+
+  const { handleToogle: handleToogle3, toogleAnimation: toogleAnimation3 } =
+    useMotiScale({ scale: 1.1 });
+
+  const { handleToogle: handleToogleLogout, toogleAnimation: toogleLogout } =
+    useMotiScale({ scale: 1.1 });
   const { isOpen, onClose, onOpen } = useDisclose();
 
   return (
@@ -65,11 +72,11 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           />
 
           <Pressable
-            onPressIn={() => (pressed.value = true)}
-            onPressOut={() => (pressed.value = false)}
+            onPressIn={handleToogle}
+            onPressOut={handleToogle}
             onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}
           >
-            <Animated.View style={animatedStyle}>
+            <MotiView state={toogleAnimation}>
               <Box
                 borderRadius={4}
                 borderWidth="1"
@@ -82,7 +89,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                   size="24px"
                 />
               </Box>
-            </Animated.View>
+            </MotiView>
           </Pressable>
         </HStack>
 
@@ -186,10 +193,10 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
         </VStack>
 
         <VStack mx={wp(5.4)} mt={hp('1.6%')}>
-          <Animated.View style={animatedStyleButton2}>
+          <MotiView state={toogleAnimation2}>
             <IconButton
-              onPressIn={() => (pressedButton2.value = true)}
-              onPressOut={() => (pressedButton2.value = false)}
+              onPressIn={handleToogle2}
+              onPressOut={handleToogle2}
               height={hp(8.4)}
               onPress={() => {
                 onOpen();
@@ -220,12 +227,12 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 color="gray.200"
               />
             </IconButton>
-          </Animated.View>
+          </MotiView>
 
-          <Animated.View style={animatedStyleButton}>
+          <MotiView state={toogleAnimation3}>
             <IconButton
-              onPressIn={() => (pressedButton.value = true)}
-              onPressOut={() => (pressedButton.value = false)}
+              onPressIn={handleToogle3}
+              onPressOut={handleToogle3}
               height={hp(8.4)}
               onPress={() => {
                 navigation.navigate('View');
@@ -251,33 +258,41 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
                 color="gray.200"
               />
             </IconButton>
-          </Animated.View>
+          </MotiView>
 
-          <IconButton height={hp(8.4)}>
-            <Icon
-              as={<SimpleLineIcons name="logout" />}
-              size={6}
-              color="red.300"
-            />
-            <Text
-              ml={3.5}
-              color="red.300"
-              h={6}
-              mb={1}
-              fontFamily="body"
-              fontWeight="400"
-              fontSize={FontSize(16)}
+          <MotiView state={toogleLogout}>
+            <IconButton
+              onPress={signOut}
+              onPressIn={handleToogleLogout}
+              onPressOut={handleToogleLogout}
+              height={hp(8.4)}
+              mb={hp(0.4)}
             >
-              Sair do sistema
-            </Text>
-            <Icon
-              as={Feather}
-              ml="auto"
-              name="chevron-right"
-              size={4}
-              color="white"
-            />
-          </IconButton>
+              <Icon
+                as={<SimpleLineIcons name="logout" />}
+                size={6}
+                color="red.300"
+              />
+              <Text
+                ml={3.5}
+                color="red.300"
+                h={6}
+                mb={1}
+                fontFamily="body"
+                fontWeight="400"
+                fontSize={FontSize(16)}
+              >
+                Sair do sistema
+              </Text>
+              <Icon
+                as={Feather}
+                ml="auto"
+                name="chevron-right"
+                size={4}
+                color="white"
+              />
+            </IconButton>
+          </MotiView>
         </VStack>
         <FormJustify isOpen={isOpen} onClose={onClose} />
       </DrawerContentScrollView>

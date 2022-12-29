@@ -26,7 +26,8 @@ import { Button } from '@components/Button';
 import { Footer } from '@components/Footer';
 
 import { useLogin } from './useSignIn';
-import { useAnimattion } from '@hooks/useAnimation';
+import { useMotiScale } from '@hooks/useMotiScale';
+import { MotiView } from 'moti';
 
 export function LoginScreen() {
   const {
@@ -43,7 +44,7 @@ export function LoginScreen() {
     wp,
   } = useLogin();
 
-  const { animatedStyle, pressed } = useAnimattion({ valueScale: 1.1 });
+  const { handleToogle, toogleAnimation } = useMotiScale({ scale: 1.1 });
 
   return (
     <VStack flex={1} width="100%" px={wp(6.4)} mt={hp(4.2)} safeArea>
@@ -126,20 +127,19 @@ export function LoginScreen() {
                   </Animated.View>
                 )}
               />
-              <Animated.View
-                entering={BounceInRight.duration(1200)}
-                style={animatedStyle}
-              >
-                <Button
-                  color="white"
-                  bgPressed="green.900"
-                  onPress={handleSubmit(SubmitLogin)}
-                  mt={hp(4.2)}
-                  onPressIn={() => (pressed.value = true)}
-                  onPressOut={() => (pressed.value = false)}
-                >
-                  Entrar na conta
-                </Button>
+              <Animated.View entering={BounceInRight.duration(1200)}>
+                <MotiView state={toogleAnimation}>
+                  <Button
+                    color="white"
+                    bgPressed="green.900"
+                    onPress={handleSubmit(SubmitLogin)}
+                    mt={hp(4.2)}
+                    onPressIn={handleToogle}
+                    onPressOut={handleToogle}
+                  >
+                    Entrar na conta
+                  </Button>
+                </MotiView>
               </Animated.View>
             </VStack>
           </VStack>

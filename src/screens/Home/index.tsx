@@ -1,4 +1,3 @@
-import Animated from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 
 import {
@@ -22,19 +21,21 @@ import { FormJustify } from '@components/ActionSheet';
 import { ModalComponent } from '@components/Modal';
 import { RegisterButtons } from '@components/RegisterPoints';
 
-import { useAnimattion as useButton } from '@hooks/useAnimation';
 import { Header } from '@components/Header';
 import { useFontSize } from '@theme/responsiveFontSize';
+
+import { MotiView } from 'moti';
+import { useMotiScale } from '@hooks/useMotiScale';
 
 export const HomeScreen = () => {
   const { onOpen, isOpen, onClose } = useDisclose();
   const navigation = useNavigation();
   const { FontSize } = useFontSize();
 
-  const { pressed: pressedButton, animatedStyle: animatedStyleButton } =
-    useButton({ valueScale: 1.1 });
-  const { pressed: pressedButton2, animatedStyle: animatedStyleButton2 } =
-    useButton({ valueScale: 1.1 });
+  const { handleToogle, toogleAnimation } = useMotiScale({ scale: 1.1 });
+
+  const { handleToogle: handleToogle2, toogleAnimation: toogleAnimation2 } =
+    useMotiScale({ scale: 1.1 });
 
   return (
     <ScrollView bg="gray.50" flex={1}>
@@ -132,10 +133,10 @@ export const HomeScreen = () => {
           <RegisterButtons />
 
           <VStack mt={hp(2.9)} space={hp(1.2)}>
-            <Animated.View style={animatedStyleButton}>
+            <MotiView state={toogleAnimation}>
               <IconButton
-                onPressIn={() => (pressedButton.value = true)}
-                onPressOut={() => (pressedButton.value = false)}
+                onPressIn={handleToogle}
+                onPressOut={handleToogle}
                 height={hp(8.4)}
                 onPress={() => {
                   navigation.navigate('View');
@@ -161,11 +162,11 @@ export const HomeScreen = () => {
                   color="gray.100"
                 />
               </IconButton>
-            </Animated.View>
-            <Animated.View style={animatedStyleButton2}>
+            </MotiView>
+            <MotiView state={toogleAnimation2}>
               <IconButton
-                onPressIn={() => (pressedButton2.value = true)}
-                onPressOut={() => (pressedButton2.value = false)}
+                onPressIn={handleToogle2}
+                onPressOut={handleToogle2}
                 height={hp(8.4)}
                 onPress={onOpen}
                 mb="10px"
@@ -194,7 +195,7 @@ export const HomeScreen = () => {
                   color="gray.100"
                 />
               </IconButton>
-            </Animated.View>
+            </MotiView>
           </VStack>
           <FormJustify isOpen={isOpen} onClose={onClose} />
         </VStack>

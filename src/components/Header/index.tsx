@@ -1,5 +1,6 @@
 import { HStack, Pressable, Image, Box, Icon } from 'native-base';
 import Animated, { ZoomIn } from 'react-native-reanimated';
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -8,10 +9,11 @@ import {
 import logo from '@assets/images/pontoUplogo.png';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useAnimattion } from '@hooks/useAnimation';
+import { MotiView } from 'moti';
+import { useMotiScale } from '@hooks/useMotiScale';
 
 export const Header = () => {
-  const { pressed, animatedStyle } = useAnimattion();
+  const { handleToogle, toogleAnimation } = useMotiScale({ scale: 1.3 });
   const navigation = useNavigation();
 
   return (
@@ -31,15 +33,15 @@ export const Header = () => {
         />
       </Animated.View>
       <Pressable
-        onPressIn={() => (pressed.value = true)}
-        onPressOut={() => (pressed.value = false)}
+        onPressIn={handleToogle}
+        onPressOut={handleToogle}
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
       >
-        <Animated.View style={animatedStyle}>
+        <MotiView state={toogleAnimation}>
           <Box borderRadius={4} borderWidth="1" p="8px" borderColor="gray.50">
             <Icon as={<MaterialIcons name="menu" />} size="24px" />
           </Box>
-        </Animated.View>
+        </MotiView>
       </Pressable>
     </HStack>
   );

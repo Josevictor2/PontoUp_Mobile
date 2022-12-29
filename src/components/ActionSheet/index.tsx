@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { Platform } from 'react-native';
-import Animated from 'react-native-reanimated';
 
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -35,9 +34,10 @@ import DateTimePicker, {
 import { ActionSchema } from './shema';
 import { ActionProps } from './types';
 import { IconButton } from '../IconButton';
-import { useAnimattion } from '@hooks/useAnimation';
+import { MotiView } from 'moti';
 import { useKeyboard } from '@hooks/useKeyboard';
 import { useFontSize } from '@theme/responsiveFontSize';
+import { useMotiScale } from '@hooks/useMotiScale';
 
 export const FormJustify = ({
   onClose,
@@ -50,7 +50,7 @@ export const FormJustify = ({
 
   const platform = Platform.OS === 'ios' ? 'padding' : 'height';
 
-  const { animatedStyle, pressed } = useAnimattion();
+  const { handleToogle, toogleAnimation } = useMotiScale({ scale: 1.3 });
   const { PressedKey } = useKeyboard();
   const { FontSize } = useFontSize();
 
@@ -105,11 +105,11 @@ export const FormJustify = ({
             </Text>
             <Box flex={1} />
             <Pressable
-              onPressIn={() => (pressed.value = true)}
-              onPressOut={() => (pressed.value = false)}
+              onPressIn={handleToogle}
+              onPressOut={handleToogle}
               onPress={onClose}
             >
-              <Animated.View style={animatedStyle}>
+              <MotiView state={toogleAnimation}>
                 <Box
                   borderRadius={4}
                   borderWidth="1"
@@ -122,7 +122,7 @@ export const FormJustify = ({
                     size="24px"
                   />
                 </Box>
-              </Animated.View>
+              </MotiView>
             </Pressable>
           </HStack>
           <ScrollView flex={1}>
