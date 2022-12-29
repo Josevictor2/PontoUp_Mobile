@@ -1,4 +1,4 @@
-import { HStack, VStack, Text, Box } from 'native-base';
+import { HStack, VStack, Text, Box, Pressable } from 'native-base';
 
 import {
   widthPercentageToDP as wp,
@@ -8,29 +8,11 @@ import {
 import { Header } from '@components/Header';
 import { useFontSize } from '@theme/responsiveFontSize';
 import { ArrowLeft } from '@assets/Svg/arrowLeft';
+import { useNavigation } from '@react-navigation/native';
 //import { RenderItem } from '@components/RenderItem';
 
-const data = [
-  {
-    id: '1',
-    title:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget aliquam ultricies, nunc nisl aliquam nunc, eget aliquam nunc nisl eget nunc.',
-  },
-  {
-    id: '2',
-    title: 'Justification 2',
-  },
-  {
-    id: '3',
-    title: 'Justification 3',
-  },
-  {
-    id: '4',
-    title: 'Justification 4',
-  },
-];
-
 export const ViewRegisterScreen = () => {
+  const navigation = useNavigation();
   const { FontSize } = useFontSize();
   return (
     <VStack h="100%" flex={1} safeArea>
@@ -42,7 +24,9 @@ export const ViewRegisterScreen = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <ArrowLeft />
+          <Pressable onPress={() => navigation.goBack()}>
+            <ArrowLeft />
+          </Pressable>
           <Box flexGrow={1} />
           <Text fontFamily="body" fontWeight="400" fontSize={FontSize(16)}>
             Visualizar frequência
@@ -50,7 +34,12 @@ export const ViewRegisterScreen = () => {
           <Box flexGrow={1} />
         </HStack>
       </VStack>
-      <VStack bg="blue.300" flex={5} />
+      <VStack
+        alignItems="center"
+        justifyContent="center"
+        bg="gray.300"
+        flex={5}
+      />
     </VStack>
   );
 };
