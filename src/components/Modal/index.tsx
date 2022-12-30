@@ -2,7 +2,7 @@ import { HStack, Modal, Text, VStack, Button, Slide } from 'native-base';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 import { useModal } from '@hooks/useModal';
-import { useSubTitle } from '@components/helpers/useSubTitle';
+import { useSubTitle } from '@components/helpers/useSubTitle/useSubTitle';
 import { useFontSize } from '@theme/responsiveFontSize';
 
 export const ModalComponent = () => {
