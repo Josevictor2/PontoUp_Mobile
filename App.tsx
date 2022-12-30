@@ -54,7 +54,7 @@ export default function App() {
         <StatusBar
           barStyle={'dark-content'}
           translucent
-          backgroundColor="transparent"
+          backgroundColor="white"
         />
         <AuthProvider>
           <ModalContextProvider>
