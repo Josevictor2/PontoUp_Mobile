@@ -11,6 +11,7 @@ import {
   KeyboardAvoidingView,
   Pressable,
   ScrollView,
+  StatusBar,
   Text,
   VStack,
 } from 'native-base';
@@ -48,6 +49,11 @@ export function LoginScreen() {
 
   return (
     <VStack flex={1} width="100%" px={wp(6.4)} mt={hp(4.2)} safeArea>
+      <StatusBar
+        barStyle={'dark-content'}
+        translucent
+        backgroundColor="transparent"
+      />
       <KeyboardAvoidingView
         key={2}
         keyboardVerticalOffset={20}
