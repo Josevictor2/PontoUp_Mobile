@@ -22,9 +22,7 @@ export const IconButton = ({ children, height, ...props }: Props) => {
         alignItems="center"
         justifyContent="center"
         mt={hp(1.2)}
-        width="100%"
         px={wp(3.8)}
-        py={hp(2.8)}
         borderRadius={8}
       >
         {children}
