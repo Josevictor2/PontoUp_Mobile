@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 
 import {
@@ -37,7 +38,7 @@ import { MotiView } from 'moti';
 import { useMotiScale } from '@hooks/useMotiScale';
 import { useAuth } from '@hooks/useAuth';
 
-export const CustomDrawer = (props: DrawerContentComponentProps) => {
+export const CustomDrawer = memo((props: DrawerContentComponentProps) => {
   const navigation = useNavigation();
   const { FontSize } = useFontSize();
   const { signOut } = useAuth();
@@ -298,4 +299,4 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
       </DrawerContentScrollView>
     </VStack>
   );
-};
+});

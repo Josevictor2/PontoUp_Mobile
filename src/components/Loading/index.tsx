@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { Image, Stack } from 'native-base';
 import { MotiView } from 'moti';
 import logo from '@assets/images/Logo.png';
@@ -7,7 +7,7 @@ type sizeType = {
   size: number;
 };
 
-const LoadingAnimated = ({ size }: sizeType) => {
+const LoadingAnimated = memo(({ size }: sizeType) => {
   return (
     <MotiView
       from={{
@@ -42,9 +42,9 @@ const LoadingAnimated = ({ size }: sizeType) => {
       }}
     />
   );
-};
+});
 
-export const LoadingFonts = () => {
+export const LoadingFonts = memo(() => {
   return (
     <Stack
       flex={1}
@@ -66,4 +66,4 @@ export const LoadingFonts = () => {
       />
     </Stack>
   );
-};
+});
