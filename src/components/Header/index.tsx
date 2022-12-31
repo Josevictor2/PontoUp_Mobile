@@ -1,5 +1,5 @@
+import { memo } from 'react';
 import { HStack, Pressable, Image, Box, Icon } from 'native-base';
-import Animated, { ZoomIn } from 'react-native-reanimated';
 
 import {
   widthPercentageToDP as wp,
@@ -11,8 +11,9 @@ import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { MotiView } from 'moti';
 import { useMotiScale } from '@hooks/useMotiScale';
+import { Zoom as ZoomIn } from '@animations/ZoomIn';
 
-export const Header = () => {
+export const Header = memo(() => {
   const { handleToogle, toogleAnimation } = useMotiScale({ scale: 1.3 });
   const navigation = useNavigation();
 
@@ -23,7 +24,7 @@ export const Header = () => {
       alignItems="center"
       justifyContent="space-between"
     >
-      <Animated.View entering={ZoomIn.duration(1500)}>
+      <ZoomIn>
         <Image
           width={wp('22.4%')}
           height={hp('4.2%')}
@@ -31,7 +32,7 @@ export const Header = () => {
           source={logo}
           alt="PontoUp"
         />
-      </Animated.View>
+      </ZoomIn>
       <Pressable
         onPressIn={handleToogle}
         onPressOut={handleToogle}
@@ -45,4 +46,4 @@ export const Header = () => {
       </Pressable>
     </HStack>
   );
-};
+});
