@@ -8,15 +8,7 @@ import { useMotiScale } from '@hooks/useMotiScale';
 import { useNavigation } from '@react-navigation/native';
 import { useFontSize } from '@theme/responsiveFontSize';
 import { MotiView } from 'moti';
-import {
-  HStack,
-  ScrollView,
-  VStack,
-  Text,
-  Box,
-  Icon,
-  useDisclose,
-} from 'native-base';
+import { HStack, VStack, Text, Box, Icon, useDisclose } from 'native-base';
 
 import {
   widthPercentageToDP as wp,
@@ -112,73 +104,72 @@ export const HomeScreen = () => {
             12/11/2022 às 21:07 min
           </Text>
         </HStack>
-        <ScrollView>
-          <RegisterButtons />
-          <VStack mt={hp(1.9)}>
-            <MotiView state={toogleAnimation}>
-              <IconButton
-                onPressIn={handleToogle}
-                onPressOut={handleToogle}
-                height={hp(8.4)}
-                onPress={() => {
-                  navigation.navigate('View');
-                }}
+        <RegisterButtons />
+        <VStack mt={hp(1.9)}>
+          <MotiView state={toogleAnimation}>
+            <IconButton
+              onPressIn={handleToogle}
+              onPressOut={handleToogle}
+              height={hp(8.4)}
+              onPress={() => {
+                navigation.navigate('View');
+              }}
+            >
+              <Icon as={<Feather name="eye" />} size={6} color="gray.400" />
+              <Text
+                ml={3.5}
+                color="secondary.100"
+                h={6}
+                mb={1}
+                fontFamily="body"
+                fontWeight="400"
+                fontSize={FontSize(14)}
               >
-                <Icon as={<Feather name="eye" />} size={6} color="gray.400" />
-                <Text
-                  ml={3.5}
-                  color="secondary.100"
-                  h={6}
-                  mb={1}
-                  fontFamily="body"
-                  fontWeight="400"
-                  fontSize={FontSize(14)}
-                >
-                  Visualizar Frequência
-                </Text>
-                <Box flexGrow={1} />
-                <Icon
-                  as={Feather}
-                  name="chevron-right"
-                  size="sm"
-                  color="gray.100"
-                />
-              </IconButton>
-            </MotiView>
-            <MotiView state={toogleAnimation2}>
-              <IconButton
-                onPressIn={handleToogle2}
-                onPressOut={handleToogle2}
-                height={hp(8.4)}
-                onPress={onOpen}
+                Visualizar Frequência
+              </Text>
+              <Box flexGrow={1} />
+              <Icon
+                as={Feather}
+                name="chevron-right"
+                size="sm"
+                color="gray.100"
+              />
+            </IconButton>
+          </MotiView>
+          <MotiView state={toogleAnimation2}>
+            <IconButton
+              onPressIn={handleToogle2}
+              onPressOut={handleToogle2}
+              height={hp(8.4)}
+              onPress={onOpen}
+            >
+              <Icon
+                as={<MaterialCommunityIcons name="calendar-clock-outline" />}
+                size={6}
+                color="gray.400"
+              />
+              <Text
+                ml={3.5}
+                color="secondary.100"
+                h={6}
+                mb={1}
+                fontFamily="body"
+                fontWeight="400"
+                fontSize={FontSize(14)}
               >
-                <Icon
-                  as={<MaterialCommunityIcons name="calendar-clock-outline" />}
-                  size={6}
-                  color="gray.400"
-                />
-                <Text
-                  ml={3.5}
-                  color="secondary.100"
-                  h={6}
-                  mb={1}
-                  fontFamily="body"
-                  fontWeight="400"
-                  fontSize={FontSize(14)}
-                >
-                  Justificar falta
-                </Text>
-                <Box flexGrow={1} />
-                <Icon
-                  as={Feather}
-                  name="chevron-right"
-                  size="sm"
-                  color="gray.100"
-                />
-              </IconButton>
-            </MotiView>
-          </VStack>
-        </ScrollView>
+                Justificar falta
+              </Text>
+              <Box flexGrow={1} />
+              <Icon
+                as={Feather}
+                ml="auto"
+                name="chevron-right"
+                size="sm"
+                color="gray.100"
+              />
+            </IconButton>
+          </MotiView>
+        </VStack>
         <FormJustify isOpen={isOpen} onClose={onClose} />
       </VStack>
       <ModalComponent />
