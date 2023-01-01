@@ -20,6 +20,7 @@ module.exports = function (api) {
             '@screens': './src/screens',
             '@animations': './src/animations',
             '@services': './src/services',
+            '@utils': './src/utils',
             '@theme': './src/theme',
           },
         },
