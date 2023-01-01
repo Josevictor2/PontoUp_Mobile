@@ -14,27 +14,7 @@ import { Feather } from '@expo/vector-icons';
 import { useSelectDate } from '@components/helpers/useSelectDate';
 import { pt } from 'date-fns/locale';
 import { ItemRender } from '@components/ItemRender';
-
-const data = [
-  {
-    id: '1',
-    title: 'First Item',
-    name: 'João',
-    date: '2021-07-01',
-  },
-  {
-    id: '2',
-    title: 'Second Item',
-    name: 'João',
-    date: '2021-07-02',
-  },
-  {
-    id: '3',
-    title: 'Third Item',
-    name: 'João',
-    date: '2021-07-03',
-  },
-];
+import { data } from '@components/helpers/dataTemporario';
 
 const ItemSeparator = () => <Box w="100%" h={2} />;
 
@@ -95,7 +75,12 @@ export const ViewRegisterScreen = () => {
             <Feather name="chevron-left" size={24} />
           </Pressable>
           <Box flexGrow={1} />
-          <Text>
+          <Text
+            fontFamily="body"
+            fontSize={FontSize(14)}
+            fontWeight="400"
+            textTransform="capitalize"
+          >
             {format(firstDayCurrentMonth, 'MMM, yyyy', { locale: pt })}
           </Text>
           <Box flexGrow={1} />
@@ -118,9 +103,12 @@ export const ViewRegisterScreen = () => {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <ItemRender
-                date={item.date}
-                name={item.name}
-                title={item.title}
+                data={item.data}
+                status={item.status}
+                entrada={item.entrada}
+                intervalo={item.intervalo}
+                retorno={item.retorno}
+                saida={item.saida}
               />
             )}
           />

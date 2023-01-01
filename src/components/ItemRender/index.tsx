@@ -1,5 +1,8 @@
+import { CollapsedAnimation } from '@animations/Collapsed';
+import { RotationAnimation } from '@animations/Rotation/Rotation';
 import { Feather } from '@expo/vector-icons';
-import { AnimatePresence, MotiView } from 'moti';
+import { useFontSize } from '@theme/responsiveFontSize';
+import { AnimatePresence } from 'moti';
 import { Box, HStack, Text, VStack } from 'native-base';
 import { useMemo, useState } from 'react';
 import { LayoutChangeEvent, Pressable } from 'react-native';
@@ -7,20 +10,38 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+import { Chip } from './Chip';
+import { SubTitle, Title } from './TextSchedule';
 
 type ItemProps = {
-  title: string;
-  name: string;
-  date: string;
+  data: string;
+  status: string;
+  entrada: string | null;
+  intervalo: string | null;
+  retorno: string | null;
+  saida: string | null;
 };
 
-export const ItemRender = ({ name, title }: ItemProps) => {
+export const ItemRender = ({
+  data,
+  entrada,
+  intervalo,
+  retorno,
+  saida,
+  status,
+}: ItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [bodySectionHeight, setBodySectionHeight] = useState<number>(0);
+  const [layout, setLayout] = useState<number>(0);
+
+  const { FontSize } = useFontSize();
+
+  const isPeding = useMemo(() => status === 'pendente', [status]);
+  const isPresent = useMemo(() => status === 'concluido', [status]);
+  const isDayOff = useMemo(() => status === 'folga', [status]);
 
   const onLayout = useMemo(
     () => (e: LayoutChangeEvent) => {
-      setBodySectionHeight(e.nativeEvent.layout.height);
+      setLayout(e.nativeEvent.layout.height);
     },
     [],
   );
@@ -45,23 +66,54 @@ export const ItemRender = ({ name, title }: ItemProps) => {
         h={hp(6.25)}
         px={wp(3.2)}
       >
-        <Text>{title}</Text>
+        <VStack>
+          <Text
+            fontFamily="mono"
+            fontWeight="400"
+            color="#212429"
+            bold
+            fontSize={FontSize(14)}
+          >
+            {data}
+          </Text>
+          <Text
+            color="#767A80"
+            fontFamily="mono"
+            fontWeight="300"
+            fontSize={FontSize(10)}
+            textTransform="capitalize"
+          >
+            segunda - feira
+          </Text>
+        </VStack>
         <Box flexGrow={1} />
-        <Text>{name}</Text>
+        {isPeding ? (
+          <Chip
+            color="#D3951A"
+            bg="#D3951A1A"
+            borderColor="rgba(211, 149, 26, 0.15)"
+            status="Pendente"
+          />
+        ) : null}
+        {isPresent ? (
+          <Chip
+            color="#30663C"
+            bg="#30663C1A"
+            borderColor="rgba(48, 102, 60, 0.15)"
+            status="Concluído"
+          />
+        ) : null}
+        {isDayOff ? (
+          <Chip
+            color="#0369a1"
+            bg="#bae6fd"
+            borderColor="#0ea5e9"
+            status="Folga"
+          />
+        ) : null}
         <Box flexGrow={1} />
         <Pressable onPress={handleOpen}>
-          <MotiView
-            from={{
-              rotate: '0deg',
-            }}
-            animate={{
-              rotate: isOpen ? '90deg' : '0deg',
-            }}
-            transition={{
-              type: 'timing',
-              duration: 300,
-            }}
-          >
+          <RotationAnimation deg="90deg" isOpen={isOpen}>
             <Box
               justifyContent="center"
               alignItems="center"
@@ -72,31 +124,41 @@ export const ItemRender = ({ name, title }: ItemProps) => {
             >
               <Feather name="chevron-right" size={24} color="black" />
             </Box>
-          </MotiView>
+          </RotationAnimation>
         </Pressable>
       </HStack>
       <AnimatePresence>
         {isOpen ? (
-          <MotiView
-            from={{
-              height: 0,
-            }}
-            animate={{
-              height: isOpen ? bodySectionHeight : 0,
-            }}
-            transition={{
-              type: 'timing',
-              duration: 400,
-            }}
-            exit={{
-              height: 0,
-            }}
-          >
-            <VStack onLayout={onLayout} h={hp(41.8)} mt="14px" px={wp(3.2)}>
-              <Text>Teste</Text>
-              <Text>Teste</Text>
+          <CollapsedAnimation isOpen={isOpen} layout={layout}>
+            <VStack
+              onLayout={onLayout}
+              h={hp(40)}
+              mt="14px"
+              space={hp(2)}
+              px={wp(3.2)}
+            >
+              <VStack>
+                <Title>Horário de entrada</Title>
+                <SubTitle>{entrada === null ? '--' : entrada}</SubTitle>
+              </VStack>
+              <VStack>
+                <Title>Horário de intervalo - IDA</Title>
+                <SubTitle>{intervalo === null ? '--' : intervalo}</SubTitle>
+              </VStack>
+              <VStack>
+                <Title>Horário de retorno - VOLTA</Title>
+                <SubTitle>{retorno === null ? '--' : retorno}</SubTitle>
+              </VStack>
+              <VStack>
+                <Title>Horário de saída</Title>
+                <SubTitle>{saida === null ? '--' : saida}</SubTitle>
+              </VStack>
+              <VStack>
+                <Title>Evento</Title>
+                <SubTitle>--</SubTitle>
+              </VStack>
             </VStack>
-          </MotiView>
+          </CollapsedAnimation>
         ) : null}
       </AnimatePresence>
     </VStack>
