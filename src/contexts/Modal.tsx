@@ -7,6 +7,10 @@ export type ModalContext = {
   setTitle: (title: string) => void;
   modalStatus: number;
   setModalStatus: (modalStatus: number) => void;
+  openSchedule: boolean;
+  setOpenSchedule: (openSchedule: boolean) => void;
+  openMyData: boolean;
+  setOpenMyData: (openMyData: boolean) => void;
 };
 
 export const ModalContext = createContext({} as ModalContext);
@@ -21,6 +25,8 @@ export const ModalContextProvider: FC<ModalContextProviderProps> = ({
   const [showModal, setShowModal] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
   const [modalStatus, setModalStatus] = useState<number>(0);
+  const [openSchedule, setOpenSchedule] = useState<boolean>(false);
+  const [openMyData, setOpenMyData] = useState<boolean>(false);
 
   return (
     <ModalContext.Provider
@@ -31,6 +37,10 @@ export const ModalContextProvider: FC<ModalContextProviderProps> = ({
         setTitle,
         modalStatus,
         setModalStatus,
+        openSchedule,
+        setOpenSchedule,
+        openMyData,
+        setOpenMyData,
       }}
     >
       {children}
