@@ -35,8 +35,9 @@ export const ViewRegisterScreen = () => {
           <Pressable
             _pressed={{
               opacity: 0.5,
-              bg: 'gray.300',
-              borderRadius: 20,
+              backgroundColor: 'gray.50',
+              borderRadius: 4,
+              p: '8px',
             }}
             onPress={() => navigation.goBack()}
           >
