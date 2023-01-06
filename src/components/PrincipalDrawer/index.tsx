@@ -169,6 +169,7 @@ export const PrincipalDrawer = memo((props: DrawerContentComponentProps) => {
               height={hp(8.4)}
               onPress={() => {
                 navigation.navigate('View');
+                navigation.dispatch(DrawerActions.closeDrawer());
               }}
             >
               <Icon as={<Feather name="eye" />} size={6} color="gray.400" />
