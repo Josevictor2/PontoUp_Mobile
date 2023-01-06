@@ -1,3 +1,46 @@
+export const dataTemporarily = [
+  {
+    id: '1',
+    day: 'Segunda-feira',
+    entrada: '08:00',
+    intervalo: '12:00',
+    retorno: '13:00',
+    saida: '18:00',
+  },
+  {
+    id: '2',
+    day: 'Terça-feira',
+    entrada: '08:00',
+    intervalo: '12:00',
+    retorno: '13:00',
+    saida: '18:00',
+  },
+  {
+    id: '3',
+    day: 'Quarta-feira',
+    entrada: '08:00',
+    intervalo: '12:00',
+    retorno: '13:00',
+    saida: '18:00',
+  },
+  {
+    id: '4',
+    day: 'Quinta-feira',
+    entrada: '08:00',
+    intervalo: '12:00',
+    retorno: '13:00',
+    saida: '18:00',
+  },
+  {
+    id: '5',
+    day: 'Sexta-feira',
+    entrada: '08:00',
+    intervalo: '12:00',
+    retorno: '13:00',
+    saida: '18:00',
+  },
+];
+
 export const data = [
   {
     id: '1',
