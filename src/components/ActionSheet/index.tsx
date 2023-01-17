@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import { Platform } from 'react-native';
 
 import { Feather, MaterialIcons } from '@expo/vector-icons';
-import { yupResolver } from '@hookform/resolvers/yup';
+
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import {
   Actionsheet,
@@ -19,7 +19,6 @@ import {
   ScrollView,
   Select,
   Text,
-  TextArea,
   VStack,
 } from 'native-base';
 
@@ -27,55 +26,41 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import DateTimePicker, {
-  DateTimePickerEvent,
-} from '@react-native-community/datetimepicker';
 
-import { ActionSchema } from './shema';
-import { ActionProps } from './types';
 import { IconButton } from '../IconButton';
 import { MotiView } from 'moti';
 import { useKeyboard } from '@hooks/useKeyboard';
 import { useFontSize } from '@theme/responsiveFontSize';
 import { useMotiScale } from '@hooks/useMotiScale';
+import { format } from 'date-fns';
+import { useJustify } from './useJustify';
+import React from 'react';
 
 export const FormJustify = ({
   onClose,
   isOpen,
   ...props
 }: IActionsheetProps) => {
-  const [show, setShow] = useState(false);
-  const [date, setDate] = useState<Date | undefined>(new Date());
-  const [textAreaValue, setTextAreaValue] = useState('');
-
   const platform = Platform.OS === 'ios' ? 'padding' : 'height';
 
   const { handleToogle, toogleAnimation } = useMotiScale({ scale: 1.3 });
   const { PressedKey } = useKeyboard();
   const { FontSize } = useFontSize();
 
-  const onDateSelect = (
-    event: DateTimePickerEvent,
-    dateInicio?: Date | undefined,
-  ) => {
-    setShow(false);
-    setDate(dateInicio);
-  };
-
   const {
+    show,
+    handledShow,
+    SubmitForm,
     control,
+    date,
+    errors,
     handleSubmit,
-    formState: { errors },
-  } = useForm<ActionProps>({
-    resolver: yupResolver(ActionSchema),
-    defaultValues: {
-      initData: new Date(),
-    },
-  });
-
-  const SubmitForm = (data: ActionProps) => {
-    console.log(data.select, data.initData);
-  };
+    onDateSelect,
+    dateEnd,
+    handledShowEnd,
+    onDateSelectEnd,
+    showEnd,
+  } = useJustify();
 
   return (
     <KeyboardAvoidingView behavior={platform} flex={1}>
@@ -181,48 +166,107 @@ export const FormJustify = ({
                 )}
               />
 
-              <IconButton height={hp(6.2)} onPress={() => setShow(true)}>
-                <Text
-                  ml={3.5}
-                  color="gray.300"
-                  h={6}
-                  mb={1}
-                  fontFamily="body"
-                  fontWeight="400"
-                  fontSize={FontSize(16)}
-                >
-                  {' '}
-                  Data Inicial
-                </Text>
-                <Icon
-                  as={Feather}
-                  ml="auto"
-                  name="calendar"
-                  size="md"
-                  color="text.300"
-                />
-              </IconButton>
+              <HStack justifyContent="center" alignItems="center">
+                <VStack>
+                  <FormControl isInvalid={!!errors.initData}>
+                    <IconButton
+                      height={hp(6.2)}
+                      w={wp(43)}
+                      onPress={handledShow}
+                    >
+                      <Text
+                        color="gray.300"
+                        h={6}
+                        mb={1}
+                        fontFamily="body"
+                        fontWeight="400"
+                        fontSize={FontSize(16)}
+                      >
+                        {date !== undefined
+                          ? format(date, 'dd/MM/yyyy')
+                          : 'Data Inicial'}
+                      </Text>
+                      <Icon
+                        as={Feather}
+                        ml="auto"
+                        name="calendar"
+                        size="md"
+                        color="text.300"
+                      />
+                    </IconButton>
+                    <FormControl.ErrorMessage>
+                      {errors.initData?.message}
+                    </FormControl.ErrorMessage>
+                  </FormControl>
+                </VStack>
+
+                <Box flexGrow={1} />
+
+                <VStack>
+                  <FormControl isInvalid={!!errors.initEnd}>
+                    <IconButton
+                      height={hp(6.2)}
+                      w={wp(43)}
+                      onPress={handledShowEnd}
+                    >
+                      <Text
+                        color="gray.300"
+                        h={6}
+                        mb={1}
+                        fontFamily="body"
+                        fontWeight="400"
+                        fontSize={FontSize(16)}
+                      >
+                        {dateEnd !== undefined
+                          ? format(dateEnd, 'dd/MM/yyyy')
+                          : 'Data Final'}
+                      </Text>
+                      <Icon
+                        as={Feather}
+                        ml="auto"
+                        name="calendar"
+                        size="md"
+                        color="text.300"
+                      />
+                    </IconButton>
+                    <FormControl.ErrorMessage>
+                      {errors.initEnd?.message}
+                    </FormControl.ErrorMessage>
+                  </FormControl>
+                </VStack>
+              </HStack>
               {show && (
                 <DateTimePicker
                   value={date || new Date()}
-                  //maximumDate={dateEnd}
+                  minimumDate={new Date(2021)}
+                  maximumDate={dateEnd}
                   mode="date"
                   display="default"
                   is24Hour={true}
                   onChange={onDateSelect}
                 />
               )}
-              <TextArea
+              {showEnd && (
+                <DateTimePicker
+                  value={dateEnd || new Date()}
+                  minimumDate={date}
+                  mode="date"
+                  display="default"
+                  is24Hour={true}
+                  onChange={onDateSelectEnd}
+                />
+              )}
+              {/*<TextArea
                 autoCompleteType={'off'}
                 value={textAreaValue}
                 onChangeText={(text) => setTextAreaValue(text)}
-              />
+              />*/}
 
-              <Text>{date?.toDateString()}</Text>
               <Button
                 color="white"
                 onPress={handleSubmit(SubmitForm)}
                 mt={hp(4.2)}
+                disabled={date === undefined}
               >
                 Entrar na conta
               </Button>

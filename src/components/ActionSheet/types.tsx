@@ -1,4 +1,5 @@
 export type ActionProps = {
   select: string;
-  initData: Date;
+  initData: Date | undefined;
+  initEnd: Date | undefined;
 };
