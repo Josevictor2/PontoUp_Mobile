@@ -61,6 +61,7 @@ export const FormJustify = ({
     handledShowEnd,
     onDateSelectEnd,
     showEnd,
+    pickDocument,
   } = useJustify();
 
   return (
@@ -166,7 +167,6 @@ export const FormJustify = ({
                   </FormControl>
                 )}
               />
-
               <HStack justifyContent="center" alignItems="center">
                 <VStack>
                   <FormControl isInvalid={!!errors.startDate}>
@@ -281,12 +281,26 @@ export const FormJustify = ({
               )}
 
               <Button
-                color="white"
+                mt="2"
+                _text={{ color: 'green.800' }}
+                _pressed={{ color: 'white', bg: 'gray.600' }}
+                bg="white"
+                borderWidth={1}
+                borderStyle="dashed"
+                borderColor="green.800"
+                onPress={pickDocument}
+              >
+                Selecione um arquivo
+              </Button>
+
+              <Button
+                _text={{ color: 'white' }}
+                bg="green.700"
                 onPress={handleSubmit(SubmitForm)}
                 mt={hp(4.2)}
                 disabled={date === undefined}
               >
-                Entrar na conta
+                Enviar ocorrência
               </Button>
             </VStack>
           </ScrollView>

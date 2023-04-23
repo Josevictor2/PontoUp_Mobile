@@ -1,7 +1,5 @@
 import * as z from 'zod';
 
-// const MAX_5MB = 5 * 1024 * 1024;
-
 export const Schema = z.object({
   select: z
     .string({
@@ -21,13 +19,12 @@ export const Schema = z.object({
       required_error: 'Campo obrigatório',
     })
     .min(1, 'Campo obrigatório'),
-  // file: z
-  //   .instanceof(FileList)
-  //   .transform((list) => list.item(0))
-  //   .optional()
-  //   .refine((file) => !file || (file.size > 0 && file.size <= MAX_5MB), {
-  //     message: 'Arquivo deve ter no máximo 5MB',
-  //   }),
+  file: z
+    .string({
+      required_error: 'Campo obrigatório',
+    })
+    .url()
+    .optional(),
 });
 
 export type CreatePost = z.infer<typeof Schema>;
