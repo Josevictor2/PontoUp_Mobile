@@ -23,12 +23,11 @@ const ItemSeparator = () => (
   />
 );
 
-type ItemProps = Record<
-  'day' | 'entrada' | 'intervalo' | 'retorno' | 'saida',
-  string | null
+type ItemType = Partial<
+  Record<'day' | 'entrada' | 'intervalo' | 'retorno' | 'saida', string | null>
 >;
 
-export const ListSchedule: FC<ItemProps> = ({
+export const ListSchedule: FC<ItemType> = ({
   day,
   entrada,
   intervalo,

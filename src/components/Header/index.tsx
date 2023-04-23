@@ -14,8 +14,8 @@ import { useMotiScale } from '@hooks/useMotiScale';
 import { Zoom as ZoomIn } from '@animations/ZoomIn';
 
 export const Header = memo(() => {
-  const { handleToogle, toogleAnimation } = useMotiScale({ scale: 1.3 });
   const navigation = useNavigation();
+  const { handleToogle, toogleAnimation } = useMotiScale({ scale: 1.3 });
 
   return (
     <HStack

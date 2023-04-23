@@ -1,14 +1,14 @@
 import { MotiView } from 'moti';
 import { FC } from 'react';
 
-type RotationProps = {
+type RotationType = {
   isOpen: boolean;
   deg: string;
   duration?: number;
   children: React.ReactNode;
 };
 
-export const RotationAnimation: FC<RotationProps> = ({
+export const RotationAnimation: FC<RotationType> = ({
   children,
   deg,
   isOpen,

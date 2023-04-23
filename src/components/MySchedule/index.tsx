@@ -13,7 +13,6 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import { useFontSize } from '@theme/responsiveFontSize';
-
 export const MySchedule = (props: DrawerContentComponentProps) => {
   const { FontSize } = useFontSize();
   return (
@@ -31,16 +30,29 @@ export const MySchedule = (props: DrawerContentComponentProps) => {
               Meus Horários
             </Text>
             <VStack space={2} bg="white" w="100%">
-              {dataTemporarily.map((item, index) => (
-                <ListSchedule
-                  key={index}
-                  day={item.day}
-                  entrada={item.entrada}
-                  intervalo={item.intervalo}
-                  retorno={item.retorno}
-                  saida={item.saida}
-                />
-              ))}
+              {dataTemporarily.length > 0 ? (
+                dataTemporarily.map((item, index) => (
+                  <ListSchedule
+                    key={index}
+                    day={item.day}
+                    entrada={item.entrada}
+                    intervalo={item.intervalo}
+                    retorno={item.retorno}
+                    saida={item.saida}
+                  />
+                ))
+              ) : (
+                <VStack mt={hp(3.8)}>
+                  <Text
+                    fontFamily="body"
+                    fontWeight="400"
+                    textAlign="center"
+                    fontSize={FontSize(20)}
+                  >
+                    Nenhuma horário registrado no momento!
+                  </Text>
+                </VStack>
+              )}
             </VStack>
           </VStack>
         </Slider>

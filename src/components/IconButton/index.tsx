@@ -7,11 +7,11 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-type Props = IPressableProps & {
+type PressableType = IPressableProps & {
   children: ReactNode;
 };
 
-export const IconButton = ({ children, height, ...props }: Props) => {
+export const IconButton = ({ children, height, ...props }: PressableType) => {
   return (
     <Pressable {...props}>
       <HStack

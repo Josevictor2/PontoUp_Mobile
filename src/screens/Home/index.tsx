@@ -16,8 +16,8 @@ import {
 } from 'react-native-responsive-screen';
 
 export const HomeScreen = () => {
-  const { onOpen, isOpen, onClose } = useDisclose();
   const navigation = useNavigation();
+  const { onOpen, isOpen, onClose } = useDisclose();
   const { FontSize } = useFontSize();
 
   const { handleToogle, toogleAnimation } = useMotiScale({ scale: 1.1 });

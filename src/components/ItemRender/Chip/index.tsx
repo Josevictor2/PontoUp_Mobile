@@ -6,14 +6,9 @@ import {
 } from 'react-native-responsive-screen';
 import { useFontSize } from '@theme/responsiveFontSize';
 
-type ChipProps = {
-  status: string;
-  color: string;
-  bg: string;
-  borderColor: string;
-};
+type ChipType = Record<'status' | 'color' | 'bg' | 'borderColor', string>;
 
-export const Chip: FC<ChipProps> = ({ status, color, bg, borderColor }) => {
+export const Chip: FC<ChipType> = ({ status, color, bg, borderColor }) => {
   const { FontSize } = useFontSize();
   return (
     <Box

@@ -1,9 +1,9 @@
-import { yupResolver } from '@hookform/resolvers/yup';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { zodResolver } from '@hookform/resolvers/zod';
 import { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ActionSchema } from '../shema';
-import { ActionProps } from '../types';
+import { CreatePost, Schema } from '../shema';
 
 export const useJustify = () => {
   const [show, setShow] = useState(false);
@@ -15,26 +15,20 @@ export const useJustify = () => {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<ActionProps>({
-    resolver: yupResolver(ActionSchema),
+  } = useForm<CreatePost>({
+    resolver: zodResolver(Schema),
   });
 
-  const onDateSelect = (
-    _event: DateTimePickerEvent,
-    dateInicio?: Date | undefined,
-  ) => {
+  const onDateSelect = (_event: DateTimePickerEvent, dateInicio?: Date) => {
     setShow(false);
-    setValue('initData', dateInicio, {
+    setValue('startDate', dateInicio!, {
       shouldValidate: true,
     });
   };
 
-  const onDateSelectEnd = (
-    _event: DateTimePickerEvent,
-    dateFinal?: Date | undefined,
-  ) => {
+  const onDateSelectEnd = (_event: DateTimePickerEvent, dateFinal?: Date) => {
     setShowEnd(false);
-    setValue('initEnd', dateFinal, {
+    setValue('endDate', dateFinal!, {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -43,11 +37,11 @@ export const useJustify = () => {
   const handledShow = () => setShow(true);
   const handledShowEnd = () => setShowEnd(true);
 
-  const date = watch('initData');
-  const dateEnd = watch('initEnd');
+  const date = watch('startDate');
+  const dateEnd = watch('endDate');
 
-  const SubmitForm = (data: ActionProps) => {
-    console.log(data.select, data.initData, data.initEnd);
+  const SubmitForm = (data: CreatePost) => {
+    console.log(data.select, data.startDate, data.endDate);
   };
 
   return {

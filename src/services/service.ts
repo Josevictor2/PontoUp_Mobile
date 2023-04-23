@@ -12,7 +12,7 @@ const signIn = (password: string): Promise<User> => {
       } else {
         reject(new Error('credenciais incorretas'));
       }
-    }, 1000);
+    }, 2000);
   });
 };
 

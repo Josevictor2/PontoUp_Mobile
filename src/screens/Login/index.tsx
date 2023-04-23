@@ -26,7 +26,7 @@ import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { Footer } from '@components/Footer';
 
-import { useLogin } from './useSignIn';
+import { useLogin } from '../../hooks/useSignIn';
 import { useMotiScale } from '@hooks/useMotiScale';
 import { MotiView } from 'moti';
 
@@ -40,8 +40,9 @@ export function LoginScreen() {
     hp,
     marginTop,
     platform,
-    toogleShow,
+    setShow,
     show,
+    isLoading,
     wp,
   } = useLogin();
 
@@ -117,7 +118,7 @@ export function LoginScreen() {
                       errorMessage={errors.password?.message}
                       onChangeText={onChange}
                       InputRightElement={
-                        <Pressable onPress={toogleShow}>
+                        <Pressable onPress={() => setShow(!show)}>
                           <Icon
                             as={
                               <MaterialIcons
@@ -136,6 +137,8 @@ export function LoginScreen() {
               <Animated.View entering={BounceInRight.duration(1200)}>
                 <MotiView state={toogleAnimation}>
                   <Button
+                    isLoading={isLoading}
+                    isLoadingText="Carregando"
                     color="white"
                     bgPressed="green.900"
                     onPress={handleSubmit(SubmitLogin)}

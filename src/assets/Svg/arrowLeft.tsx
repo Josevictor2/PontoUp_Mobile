@@ -1,12 +1,14 @@
 import Svg, { Path, SvgProps } from 'react-native-svg';
+type ArrowLeftType = SvgProps &
+  Partial<Record<'xmlns' | 'xmlnsXlink' | 'xmlSpace', string>>;
 
-interface ArrowLeftProps extends SvgProps {
-  xmlns?: string;
-  xmlnsXlink?: string;
-  xmlSpace?: string;
-}
+// interface ArrowLeftProps extends SvgProps {
+//   xmlns?: string;
+//   xmlnsXlink?: string;
+//   xmlSpace?: string;
+// }
 
-export function ArrowLeft(props: ArrowLeftProps) {
+export const ArrowLeft = (props: ArrowLeftType) => {
   return (
     <Svg
       width={20}
@@ -24,4 +26,4 @@ export function ArrowLeft(props: ArrowLeftProps) {
       />
     </Svg>
   );
-}
+};

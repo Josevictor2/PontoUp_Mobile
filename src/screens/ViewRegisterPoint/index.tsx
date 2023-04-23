@@ -1,5 +1,4 @@
 import { HStack, VStack, Text, Box, Pressable, FlatList } from 'native-base';
-import { format } from 'date-fns';
 
 import {
   widthPercentageToDP as wp,
@@ -11,21 +10,22 @@ import { useFontSize } from '@theme/responsiveFontSize';
 import { ArrowLeft } from '@assets/Svg/arrowLeft';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
-import { useSelectDate } from '@components/helpers/useSelectDate';
-import { pt } from 'date-fns/locale';
 import { ItemRender } from '@components/ItemRender';
 import { data } from '@components/helpers/dataTemporario';
+import { useViewCards } from '@hooks/useViewCards';
 
 const ItemSeparator = () => <Box w="100%" h={2} />;
 
 export const ViewRegisterScreen = () => {
   const navigation = useNavigation();
   const { FontSize } = useFontSize();
-  const { firstDayCurrentMonth, nextMonth, previusMonth } = useSelectDate();
+  const { nextMonth, disabledNext, formatMonthYear, previusMonth } =
+    useViewCards();
   return (
     <VStack h="100%" flex={1} safeArea>
       <VStack bg="white" flex={1}>
         <Header />
+
         <HStack
           px={wp('6.1%')}
           flex={1}
@@ -82,7 +82,7 @@ export const ViewRegisterScreen = () => {
             fontWeight="400"
             textTransform="capitalize"
           >
-            {format(firstDayCurrentMonth, 'MMM, yyyy', { locale: pt })}
+            {formatMonthYear()}
           </Text>
           <Box flexGrow={1} />
           <Pressable
@@ -91,6 +91,8 @@ export const ViewRegisterScreen = () => {
               bg: 'gray.300',
               borderRadius: 15,
             }}
+            _disabled={{ opacity: 0.5 }}
+            disabled={disabledNext()}
             onPress={nextMonth}
           >
             <Feather name="chevron-right" size={24} />
@@ -110,6 +112,7 @@ export const ViewRegisterScreen = () => {
                 intervalo={item.intervalo}
                 retorno={item.retorno}
                 saida={item.saida}
+                evento={item.evento}
               />
             )}
           />

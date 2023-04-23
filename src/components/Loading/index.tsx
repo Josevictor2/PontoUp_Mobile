@@ -3,9 +3,7 @@ import { Image, Stack } from 'native-base';
 import { MotiView } from 'moti';
 import logo from '@assets/images/Logo.png';
 
-type sizeType = {
-  size: number;
-};
+type sizeType = Record<'size', number>;
 
 const LoadingAnimated = memo(({ size }: sizeType) => {
   return (

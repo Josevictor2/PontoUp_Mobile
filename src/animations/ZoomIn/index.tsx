@@ -1,14 +1,14 @@
 import { MotiView } from 'moti';
 import { FC } from 'react';
 
-type Props = {
+type ZoomType = {
   children: React.ReactNode;
   scaleIn?: number;
   scaleOut?: number;
   duration?: number;
 };
 
-export const Zoom: FC<Props> = ({
+export const Zoom: FC<ZoomType> = ({
   children,
   scaleIn = 0,
   scaleOut = 1,

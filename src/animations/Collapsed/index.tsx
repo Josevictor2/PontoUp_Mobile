@@ -1,14 +1,14 @@
 import { MotiView } from 'moti';
 import { FC } from 'react';
 
-type CollapsedProps = {
+type CollapsedType = {
   isOpen: boolean;
   layout: number;
   duration?: number;
   children: React.ReactNode;
 };
 
-export const CollapsedAnimation: FC<CollapsedProps> = ({
+export const CollapsedAnimation: FC<CollapsedType> = ({
   children,
   isOpen,
   layout,

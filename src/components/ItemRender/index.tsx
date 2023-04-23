@@ -12,14 +12,17 @@ import {
 } from 'react-native-responsive-screen';
 import { Chip } from './Chip';
 import { SubTitle, Title } from './TextSchedule';
+import { format } from 'date-fns';
+import { pt } from 'date-fns/locale';
 
-type ItemProps = {
-  data: string;
+type ItemType = {
+  data: Date;
   status: string;
   entrada: string | null;
   intervalo: string | null;
   retorno: string | null;
   saida: string | null;
+  evento?: string | null;
 };
 
 export const ItemRender = ({
@@ -29,7 +32,8 @@ export const ItemRender = ({
   retorno,
   saida,
   status,
-}: ItemProps) => {
+  evento,
+}: ItemType) => {
   const [isOpen, setIsOpen] = useState(false);
   const [layout, setLayout] = useState<number>(0);
 
@@ -38,6 +42,7 @@ export const ItemRender = ({
   const isPeding = useMemo(() => status === 'pendente', [status]);
   const isPresent = useMemo(() => status === 'concluido', [status]);
   const isDayOff = useMemo(() => status === 'folga', [status]);
+  const isHoliday = useMemo(() => status === 'feriado', [status]);
 
   const onLayout = useMemo(
     () => (e: LayoutChangeEvent) => {
@@ -45,10 +50,13 @@ export const ItemRender = ({
     },
     [],
   );
-
-  const handleOpen = () => {
-    setIsOpen(!isOpen);
+  const formatdate = (date: Date) => {
+    return format(date, 'dd/MM/yyyy', { locale: pt });
   };
+  const formatday = (date: Date) => {
+    return format(date, 'cccc', { locale: pt });
+  };
+  const handleOpen = () => setIsOpen(!isOpen);
 
   return (
     <VStack
@@ -74,7 +82,7 @@ export const ItemRender = ({
             bold
             fontSize={FontSize(14)}
           >
-            {data}
+            {formatdate(data)}
           </Text>
           <Text
             color="#767A80"
@@ -83,7 +91,7 @@ export const ItemRender = ({
             fontSize={FontSize(10)}
             textTransform="capitalize"
           >
-            segunda - feira
+            {formatday(data)}
           </Text>
         </VStack>
         <Box flexGrow={1} />
@@ -109,6 +117,14 @@ export const ItemRender = ({
             bg="#bae6fd"
             borderColor="#0ea5e9"
             status="Folga"
+          />
+        ) : null}
+        {isHoliday ? (
+          <Chip
+            color="#800222"
+            bg="#d8abab"
+            borderColor="#b67180"
+            status="Feriado"
           />
         ) : null}
         <Box flexGrow={1} />
@@ -155,7 +171,7 @@ export const ItemRender = ({
               </VStack>
               <VStack>
                 <Title>Evento</Title>
-                <SubTitle>--</SubTitle>
+                <SubTitle>{evento === null ? '--' : evento}</SubTitle>
               </VStack>
             </VStack>
           </CollapsedAnimation>

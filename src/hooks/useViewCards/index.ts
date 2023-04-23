@@ -1,7 +1,9 @@
-import { startOfToday, format, parse, add } from 'date-fns';
 import { useState } from 'react';
 
-export const useSelectDate = () => {
+import { startOfToday, format, parse, add, isAfter } from 'date-fns';
+import { pt } from 'date-fns/locale';
+
+export const useViewCards = () => {
   const today = startOfToday();
 
   const [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'));
@@ -17,5 +19,18 @@ export const useSelectDate = () => {
     setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
   }
 
-  return { nextMonth, previusMonth, firstDayCurrentMonth };
+  function disabledNext() {
+    return isAfter(firstDayCurrentMonth, today);
+  }
+  function formatMonthYear() {
+    return format(firstDayCurrentMonth, 'MMM, yyyy', { locale: pt });
+  }
+
+  return {
+    nextMonth,
+    previusMonth,
+    disabledNext,
+    formatMonthYear,
+    firstDayCurrentMonth,
+  };
 };

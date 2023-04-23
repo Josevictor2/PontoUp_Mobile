@@ -1,11 +1,11 @@
 import { useFontSize } from '@theme/responsiveFontSize';
 import { Input as NativeInput, IInputProps, FormControl } from 'native-base';
 
-type Props = IInputProps & {
+type InputType = IInputProps & {
   errorMessage?: string;
 };
 
-export const Input = ({ errorMessage, isInvalid, ...props }: Props) => {
+export const Input = ({ errorMessage, isInvalid, ...props }: InputType) => {
   const invalid = !!errorMessage || isInvalid;
   const { FontSize } = useFontSize();
   return (

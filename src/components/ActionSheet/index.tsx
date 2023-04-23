@@ -19,6 +19,7 @@ import {
   ScrollView,
   Select,
   Text,
+  TextArea,
   VStack,
 } from 'native-base';
 
@@ -168,7 +169,7 @@ export const FormJustify = ({
 
               <HStack justifyContent="center" alignItems="center">
                 <VStack>
-                  <FormControl isInvalid={!!errors.initData}>
+                  <FormControl isInvalid={!!errors.startDate}>
                     <IconButton
                       height={hp(6.2)}
                       w={wp(43)}
@@ -195,7 +196,7 @@ export const FormJustify = ({
                       />
                     </IconButton>
                     <FormControl.ErrorMessage>
-                      {errors.initData?.message}
+                      {errors.startDate?.message}
                     </FormControl.ErrorMessage>
                   </FormControl>
                 </VStack>
@@ -203,7 +204,7 @@ export const FormJustify = ({
                 <Box flexGrow={1} />
 
                 <VStack>
-                  <FormControl isInvalid={!!errors.initEnd}>
+                  <FormControl isInvalid={!!errors.endDate}>
                     <IconButton
                       height={hp(6.2)}
                       w={wp(43)}
@@ -230,7 +231,7 @@ export const FormJustify = ({
                       />
                     </IconButton>
                     <FormControl.ErrorMessage>
-                      {errors.initEnd?.message}
+                      {errors.endDate?.message}
                     </FormControl.ErrorMessage>
                   </FormControl>
                 </VStack>
@@ -256,11 +257,28 @@ export const FormJustify = ({
                   onChange={onDateSelectEnd}
                 />
               )}
-              {/*<TextArea
-                autoCompleteType={'off'}
-                value={textAreaValue}
-                onChangeText={(text) => setTextAreaValue(text)}
-              />*/}
+              <Controller
+                control={control}
+                name="description"
+                defaultValue=""
+                render={({ field: { onChange, value } }) => (
+                  <TextArea
+                    mt="2"
+                    borderColor="gray.50"
+                    autoCompleteType="off"
+                    isInvalid={Boolean(errors.description)}
+                    _invalid={{ borderColor: 'red.800' }}
+                    onChangeText={onChange}
+                    value={value}
+                    placeholder="Digite uma descrição..."
+                  />
+                )}
+              />
+              {errors.description && (
+                <Text color="red.500" fontSize="xs">
+                  {errors.description.message}
+                </Text>
+              )}
 
               <Button
                 color="white"

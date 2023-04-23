@@ -4,6 +4,7 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import { Button } from '@components/Button';
 import { useModal } from '@hooks/useModal';
+import { currentDayIsWeekend } from '@utils/functions';
 
 export const RegisterButtons = () => {
   const { setTitle, setShowModal, setModalStatus } = useModal();
@@ -14,6 +15,7 @@ export const RegisterButtons = () => {
         h={hp(6.2)}
         bg="primary.600"
         color="primary.100"
+        disabled={currentDayIsWeekend()}
         onPress={() => {
           setTitle('Iniciar expediente');
           setShowModal(true);
@@ -27,6 +29,7 @@ export const RegisterButtons = () => {
         bg="blue.50"
         bgPressed="info.500"
         color="blue.200"
+        disabled={currentDayIsWeekend()}
         onPress={() => {
           setTitle('Registrar intervalo');
           setShowModal(true);
@@ -41,6 +44,7 @@ export const RegisterButtons = () => {
         bg="yellow.50"
         bgPressed="yellow.600"
         color="yellow.200"
+        disabled={currentDayIsWeekend()}
         onPress={() => {
           setTitle('Registrar intervalo');
           setShowModal(true);
@@ -55,6 +59,7 @@ export const RegisterButtons = () => {
         bgPressed="red.500"
         bg="red.50"
         color="red.200"
+        disabled={currentDayIsWeekend()}
         onPress={() => {
           setTitle('Finalizar expediente');
           setShowModal(true);

@@ -12,9 +12,22 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const ListData = ['Nome', 'Matrícula', 'Setor', 'Cargo/Função'];
+const ListData: string[] = ['Nome', 'Matrícula', 'Setor', 'Cargo'];
 
-const TempResponse = ['Victor Gomes', '123456', 'TI', 'Desenvolvedor'];
+type UserData = {
+  [key: string]: string;
+  nome: string;
+  matrícula: string;
+  setor: string;
+  cargo: string;
+};
+
+const TempResponse: UserData = {
+  nome: 'Victor Gomes',
+  matrícula: '123456',
+  setor: 'TI',
+  cargo: 'Desenvolvedor',
+};
 
 export const MyData = (props: DrawerContentComponentProps) => {
   const { FontSize } = useFontSize();
@@ -36,28 +49,31 @@ export const MyData = (props: DrawerContentComponentProps) => {
                 Meus dados
               </Text>
             </View>
-            {ListData.map((item, index) => (
-              <VStack key={item} mb={hp(2)}>
-                <Text
-                  fontFamily="body"
-                  fontWeight="300"
-                  fontSize={FontSize(12)}
-                  color="gray.400"
-                  lineHeight={FontSize(18)}
-                >
-                  {item}
-                </Text>
-                <Text
-                  fontFamily="body"
-                  fontWeight="400"
-                  fontSize={FontSize(14)}
-                  lineHeight={FontSize(20)}
-                  color="secondary.100"
-                >
-                  {TempResponse[index]}
-                </Text>
-              </VStack>
-            ))}
+            {ListData.map((item) => {
+              const value = TempResponse[item.toLowerCase()];
+              return (
+                <VStack key={item} mb={hp(2)}>
+                  <Text
+                    fontFamily="body"
+                    fontWeight="300"
+                    fontSize={FontSize(12)}
+                    color="gray.400"
+                    lineHeight={FontSize(18)}
+                  >
+                    {item}
+                  </Text>
+                  <Text
+                    fontFamily="body"
+                    fontWeight="400"
+                    fontSize={FontSize(14)}
+                    lineHeight={FontSize(20)}
+                    color="secondary.100"
+                  >
+                    {value}
+                  </Text>
+                </VStack>
+              );
+            })}
           </VStack>
         </Slider>
       </DrawerContentScrollView>

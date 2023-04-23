@@ -2,11 +2,11 @@ import { useFontSize } from '@theme/responsiveFontSize';
 import { Text } from 'native-base';
 import React, { FC } from 'react';
 
-type TitleProps = {
+type TitleType = {
   children: React.ReactNode;
 };
 
-export const Title: FC<TitleProps> = ({ children }) => {
+export const Title: FC<TitleType> = ({ children }) => {
   const { FontSize } = useFontSize();
   return (
     <Text
@@ -20,7 +20,7 @@ export const Title: FC<TitleProps> = ({ children }) => {
   );
 };
 
-export const SubTitle: FC<TitleProps> = ({ children }) => {
+export const SubTitle: FC<TitleType> = ({ children }) => {
   const { FontSize } = useFontSize();
   return (
     <Text
