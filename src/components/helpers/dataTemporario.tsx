@@ -44,7 +44,7 @@ export const dataTemporarily = [
 export const data = [
   {
     id: '1',
-    data: new Date(2023, 2, 10),
+    data: new Date(2023, 3, 10),
     status: 'pendente',
     entrada: null,
     intervalo: '12:00:00',
@@ -73,16 +73,6 @@ export const data = [
   },
   {
     id: '4',
-    data: new Date(2023, 3, 21),
-    status: 'feriado',
-    entrada: null,
-    intervalo: null,
-    retorno: null,
-    saida: null,
-    evento: 'Feriado de Tiradentes',
-  },
-  {
-    id: '5',
     data: new Date(2023, 3, 20),
     status: 'folga',
     entrada: null,
@@ -90,5 +80,15 @@ export const data = [
     retorno: null,
     saida: null,
     evento: null,
+  },
+  {
+    id: '5',
+    data: new Date(2023, 3, 21),
+    status: 'feriado',
+    entrada: null,
+    intervalo: null,
+    retorno: null,
+    saida: null,
+    evento: 'Feriado de Tiradentes',
   },
 ];

@@ -7,8 +7,10 @@ import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useMotiScale } from '@hooks/useMotiScale';
 import { useNavigation } from '@react-navigation/native';
 import { useFontSize } from '@theme/responsiveFontSize';
+import { format, parse } from 'date-fns';
 import { MotiView } from 'moti';
 import { HStack, VStack, Text, Box, Icon, useDisclose } from 'native-base';
+import { useEffect, useState } from 'react';
 
 import {
   widthPercentageToDP as wp,
@@ -19,10 +21,28 @@ export const HomeScreen = () => {
   const navigation = useNavigation();
   const { onOpen, isOpen, onClose } = useDisclose();
   const { FontSize } = useFontSize();
-
   const { handleToogle, toogleAnimation } = useMotiScale({ scale: 1.1 });
   const { handleToogle: handleToogle2, toogleAnimation: toogleAnimation2 } =
     useMotiScale({ scale: 1.1 });
+  const dateFormat = format(new Date(), 'dd/MM/yyyy');
+
+  const HourFormat = () => {
+    const [clockState, setClockState] = useState<Date>(
+      parse('00:00', 'HH:mm', new Date()),
+    );
+
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        setClockState(new Date());
+      }, 1000);
+
+      return () => clearInterval(intervalId);
+    }, []);
+
+    const formattedTime = format(clockState, 'HH:mm');
+
+    return formattedTime;
+  };
   return (
     <VStack flex={1} safeArea>
       <VStack bg="white" flex={1}>
@@ -101,7 +121,7 @@ export const HomeScreen = () => {
             lineHeight={hp(2.2)}
             color="gray.400"
           >
-            12/11/2022 às 21:07 min
+            {`${dateFormat} às ${HourFormat()} min`}
           </Text>
         </HStack>
         <RegisterButtons />

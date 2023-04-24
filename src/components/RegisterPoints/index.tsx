@@ -1,4 +1,4 @@
-import { VStack } from 'native-base';
+import { VStack, Text, Box } from 'native-base';
 
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
@@ -8,22 +8,54 @@ import { currentDayIsWeekend } from '@utils/functions';
 
 export const RegisterButtons = () => {
   const { setTitle, setShowModal, setModalStatus } = useModal();
-
+  const isRegistered = true;
   return (
-    <VStack mt="8px" p="20px" space={hp(1.2)} bg="white" borderRadius={8}>
-      <Button
-        h={hp(6.2)}
-        bg="primary.600"
-        color="primary.100"
-        disabled={currentDayIsWeekend()}
-        onPress={() => {
-          setTitle('Iniciar expediente');
-          setShowModal(true);
-          setModalStatus(0);
-        }}
-      >
-        Iniciar expediente
-      </Button>
+    <VStack mt="8px" p="20px" space="3" bg="white" borderRadius={8}>
+      {!isRegistered ? (
+        <Button
+          h={hp(6.2)}
+          bg="primary.600"
+          color="primary.100"
+          // disabled={currentDayIsWeekend()}
+          onPress={() => {
+            setTitle('Iniciar expediente');
+            setShowModal(true);
+            setModalStatus(0);
+          }}
+        >
+          Iniciar expediente
+        </Button>
+      ) : (
+        <Box
+          flexDirection="row"
+          alignItems="center"
+          justifyItems="center"
+          pb={hp(0.7)}
+          borderBottomWidth={1}
+          borderStyle="dashed"
+          borderBottomColor="gray.200"
+        >
+          <Text
+            fontFamily="body"
+            fontWeight="300"
+            fontSize="lg"
+            lineHeight={hp(3.6)}
+            color="secondary.400"
+          >
+            Entrada
+          </Text>
+          <Box flexGrow={1} />
+          <Text
+            fontFamily="body"
+            fontWeight="bold"
+            fontSize="lg"
+            lineHeight={hp(3.6)}
+            color="black"
+          >
+            22:58
+          </Text>
+        </Box>
+      )}
       <Button
         h={hp(6.2)}
         bg="blue.50"
