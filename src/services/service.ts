@@ -3,11 +3,11 @@ import { User } from '@contexts/Auth';
 const signIn = (password: string): Promise<User> => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (password === '123456') {
+      if (password === '123456-7') {
         resolve({
-          token: JWTTokenMock,
+          id: JWTTokenMock,
           name: 'Lucas Garcez',
-          device: 'mobile 1',
+          idDepartment: '2424242',
         });
       } else {
         reject(new Error('credenciais incorretas'));

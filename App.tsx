@@ -1,5 +1,5 @@
-import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import 'react-native-gesture-handler';
 import { StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -11,6 +11,8 @@ import { theme } from './src/theme';
 import { Router } from './src/routes/Router';
 import { AuthProvider } from './src/contexts/Auth';
 import { ModalContextProvider } from './src/contexts/Modal';
+import { GetUserContextProvider } from './src/contexts/ContextGetUser';
+
 import {
   Sora_100Thin,
   Sora_200ExtraLight,
@@ -18,8 +20,10 @@ import {
   Sora_400Regular,
   useFonts,
 } from '@expo-google-fonts/sora';
+import React from 'react';
 
 export default function App() {
+  const queryClient = new QueryClient();
   const config = {
     dependencies: {
       'linear-gradient': LinearGradient,
@@ -57,9 +61,13 @@ export default function App() {
           backgroundColor="white"
         />
         <AuthProvider>
-          <ModalContextProvider>
-            <Router />
-          </ModalContextProvider>
+          <QueryClientProvider client={queryClient}>
+            <ModalContextProvider>
+              <GetUserContextProvider>
+                <Router />
+              </GetUserContextProvider>
+            </ModalContextProvider>
+          </QueryClientProvider>
         </AuthProvider>
       </SafeAreaProvider>
     </NativeBaseProvider>

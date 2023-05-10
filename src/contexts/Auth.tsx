@@ -5,10 +5,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { authService } from '@services/service';
 
-export type User = Record<'token' | 'name' | 'device', string>;
+export type User = Record<'id' | 'name' | 'idDepartment', string>;
 
 type AuthContextType = {
   auth?: User;
+  setAuth?: (auth: User) => void;
   signIn: (password: string) => Promise<void>;
   signOut: () => Promise<void>;
   isLoading: boolean;

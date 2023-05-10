@@ -1,11 +1,16 @@
 import { Slider } from '@animations/Slider';
 import { HeaderDrawer } from '@components/HeaderDrawer';
+import { useAuth } from '@hooks/useAuth';
+import { useGetUser } from '@hooks/useGetUser';
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
 } from '@react-navigation/drawer';
+import { getUser } from '@services/gets';
 import { useFontSize } from '@theme/responsiveFontSize';
 import { VStack, Text, View } from 'native-base';
+
+import { useQuery } from 'react-query';
 
 import {
   widthPercentageToDP as wp,
@@ -29,8 +34,30 @@ const TempResponse: UserData = {
   cargo: 'Desenvolvedor',
 };
 
+type getUserType = Record<'registration' | 'name' | 'bond' | 'email', string>;
+
 export const MyData = (props: DrawerContentComponentProps) => {
+  const { auth } = useAuth();
+  const { setGetUser } = useGetUser();
   const { FontSize } = useFontSize();
+
+  const { data } = useQuery<getUserType>({
+    queryKey: ['getUser'],
+    queryFn: () => getUser({ id: auth?.id as string }),
+    staleTime: Infinity,
+    refetchInterval: 60 * 60 * 1000,
+    onSuccess: (item: getUserType) => {
+      setGetUser({
+        name: item.name,
+        matricula: item.registration,
+        cargo: item.bond,
+        email: item.email,
+      });
+    },
+  });
+
+  console.log(data);
+
   return (
     <VStack flex={1}>
       <DrawerContentScrollView {...props}>
