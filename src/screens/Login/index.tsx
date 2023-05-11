@@ -43,6 +43,8 @@ export function LoginScreen() {
     setShow,
     show,
     isLoading,
+    isError,
+    textError,
     wp,
   } = useLogin();
 
@@ -93,17 +95,31 @@ export function LoginScreen() {
                 Fazer Login
               </Text>
             </Animated.Text>
-            <Animated.Text entering={ZoomInLeft.duration(1200)}>
-              <Text
-                fontFamily="body"
-                fontWeight="300"
-                color="gray.300"
-                lineHeight={hp(2.7)}
-                fontSize={FontSize(14)}
-              >
-                Seja bem-vindo(a)! Insira sua matrícula para entrar na conta.
-              </Text>
-            </Animated.Text>
+            <VStack>
+              <Animated.Text entering={ZoomInLeft.duration(1200)}>
+                <Text
+                  fontFamily="body"
+                  fontWeight="300"
+                  color="gray.300"
+                  lineHeight={hp(2.7)}
+                  fontSize={FontSize(14)}
+                >
+                  Seja bem-vindo(a)! Insira sua matrícula para entrar na conta.
+                </Text>
+                {isError && (
+                  <Text
+                    fontFamily="body"
+                    fontWeight="300"
+                    color="red.500"
+                    mt="2"
+                    lineHeight={hp(2.7)}
+                    fontSize={FontSize(14)}
+                  >
+                    {textError}
+                  </Text>
+                )}
+              </Animated.Text>
+            </VStack>
 
             <VStack mt={hp('7.29%')} space={3}>
               <Controller
@@ -112,7 +128,7 @@ export function LoginScreen() {
                 render={({ field: { onChange } }) => (
                   <Animated.View entering={BounceInLeft.duration(1200)}>
                     <Input
-                      keyboardType="numeric"
+                      keyboardType="numbers-and-punctuation"
                       type={show ? 'text' : 'password'}
                       placeholder="Matrícula"
                       errorMessage={errors.password?.message}

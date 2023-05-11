@@ -1,16 +1,12 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import { createContext, FC, ReactNode, useEffect, useState } from 'react';
-import { Alert } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { authService } from '@services/service';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type User = Record<'id' | 'name' | 'idDepartment', string>;
 
 type AuthContextType = {
   auth?: User;
-  setAuth?: (auth: User) => void;
-  signIn: (password: string) => Promise<void>;
+  setAuth: (auth: User) => void;
   signOut: () => Promise<void>;
   isLoading: boolean;
 };
@@ -44,23 +40,13 @@ export const AuthProvider: FC<AuthContextProviderProps> = ({ children }) => {
     }
   }
 
-  const signIn = async (password: string) => {
-    try {
-      const auth = await authService.signIn(password);
-      setAuth(auth);
-      AsyncStorage.setItem('@auth', JSON.stringify(auth));
-    } catch (error) {
-      Alert.alert('Erro', 'wrong email or password');
-    }
-  };
-
   const signOut = async () => {
     setAuth(undefined);
     await AsyncStorage.removeItem('@auth');
   };
 
   return (
-    <AuthContext.Provider value={{ auth, isLoading, signIn, signOut }}>
+    <AuthContext.Provider value={{ auth, isLoading, setAuth, signOut }}>
       {children}
     </AuthContext.Provider>
   );
